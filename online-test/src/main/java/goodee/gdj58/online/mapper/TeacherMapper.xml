@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+	<delete id="deleteTeacher" parameterType="int">
+		DELETE FROM teacher
+		WHERE teacher_no = #{teacherNo}
+	</delete>
+	
+	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
+		INSERT INTO teacher (
+			teacher_id
+			, teacher_pw
+			, teacher_name
+		) VALUES (
+			#{teacherId}
+			, PASSWORD(#{teacherPw})
+			, #{teacherName}
+		)
+	</insert>
+	
+	<select id="selectTeacherList" resultType="goodee.gdj58.online.vo.Teacher" parameterType="java.util.Map">
+		SELECT
+			teacher_no	teacherNo
+			, teacher_id teacherId
+			, teacher_name teacherName
+		FROM teacher
+		GROUP BY teacher_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+</mapper>

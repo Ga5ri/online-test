@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.EmployeeMapper">
+	<update id="updateEmployeePw" parameterType="java.util.Map">
+		UPDATE employee 
+		SET emp_pw = PASSWORD(#{newPw})
+		WHERE emp_no = #{empNo} AND emp_pw = PASSWORD(#{oldPw}) 
+	</update>
+	
+	<select id="login" parameterType="goodee.gdj58.online.vo.Employee" resultType="goodee.gdj58.online.vo.Employee">
+		SELECT
+			emp_no empNo 
+			, emp_id empId
+			, emp_name empName
+		FROM employee
+		WHERE emp_id = #{empId} AND emp_pw = PASSWORD(#{empPw})
+	</select>
+
+	<delete id="deleteEmployee" parameterType="int">
+		DELETE FROM employee
+		WHERE emp_no = #{empNo}
+	</delete>
+
+	
+	<insert id="insertEmployee" parameterType="goodee.gdj58.online.vo.Employee">
+		INSERT INTO employee (
+			emp_id
+			, emp_pw
+			, emp_name
+		) VALUES (
+			#{empId}
+			, PASSWORD(#{empPw})
+			, #{empName}
+		)
+	</insert>
+	
+	
+	<select id="selectEmployeeList" resultType="goodee.gdj58.online.vo.Employee" parameterType="java.util.Map">
+		SELECT
+			emp_no	empNo <!-- re.getInt("emp_no"), new employee().setEmpNo() 필드명 일치 시키는 단순한 방법(as명사용) resultMap사용해서 설정가능-->
+			, emp_id empId
+			, emp_name empName
+		FROM employee
+		GROUP BY emp_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+</mapper>
