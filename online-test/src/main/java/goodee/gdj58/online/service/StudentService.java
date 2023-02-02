@@ -16,6 +16,11 @@ import goodee.gdj58.online.vo.Student;
 public class StudentService {
 	@Autowired StudentMapper studentMapper;
 	
+	// 카운트
+	public int countStudent(String searchWord) {
+		return studentMapper.countStudent(searchWord);
+	}
+	
 	// 삭제
 	public int removeStudent(int studentNo) {
 		return studentMapper.deleteStudent(studentNo);
@@ -27,11 +32,12 @@ public class StudentService {
 	}
 	
 	// 리스트
-	public List<Student> getStudentList(int currentPage, int rowPerPage) {
+	public List<Student> getStudentList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchWord", searchWord);
 		return studentMapper.selectStudentList(paramMap);
 	}
 }

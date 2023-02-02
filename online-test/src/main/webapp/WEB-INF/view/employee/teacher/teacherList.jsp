@@ -28,14 +28,34 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<!-- 검색기능 -->
+	<form method="get" action="${pageContext.request.contextPath}/employee/teacher/teacherList">
+		<input type="text" name="searchWord">
+		<button type="submit">이름검색</button>
+	</form>
+	
+	<!-- 페이징 -->
 	<div>
+		<a class="btn" href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=1&searchWord=${searchWord}">처음</a>
 		<c:if test="${currentPage > 1}">
-			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage-1}">이전</a>
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage-1}&searchWord=${searchWord}">&lt;</a>
 		</c:if>
-		<span>${currentPage}</span>
-		<c:if test="${currentPage > 0}">
-			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage+1}">다음</a>
+		<c:forEach var="index" begin="${startPage}" end="${endPage}" step="1">
+			<c:if test="${index <= lastPage}">
+				<c:choose>
+					<c:when test="${index != currentPage}">
+						<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${index}&searchWord=${searchWord}">${index}</a>
+					</c:when>
+					<c:otherwise>
+						<strong>${index}</strong>
+					</c:otherwise>
+				</c:choose>
+			</c:if>
+		</c:forEach>
+		<c:if test="${currentPage < lastPage}">
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage+1}&searchWord=${searchWord}">&gt;</a>
 		</c:if>
+		<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${lastPage}&searchWord=${searchWord}">마지막</a>
 	</div>
 </body>
 </html>

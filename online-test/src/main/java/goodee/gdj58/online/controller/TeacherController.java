@@ -52,10 +52,25 @@ public class TeacherController {
 	@GetMapping("/employee/teacher/teacherList")
 	public String teacherList(Model model
 							, @RequestParam(value="currentPage", defaultValue="1") int currentPage
-							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage) {
-		List<Teacher> list = teacherService.getTeacherList(currentPage, rowPerPage);
+							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage
+							, @RequestParam(value="searchWord", defaultValue="") String searchWord) {
+		int cnt = teacherService.countTeacher(searchWord); // student count
+		int page = 10; // 페이지 목록
+		int startPage = ((currentPage - 1) / page) * page + 1; // 시작 페이지 ex) 1-10 = 1, 11-20 = 11
+		int endPage = startPage + page - 1; // 페이지의 마지막 ex) 1-10 = 10, 11-20 = 20
+		int lastPage = (int)Math.ceil((double)cnt / (double)rowPerPage); // 마지막 페이지
+		if(lastPage < endPage) {
+			endPage = lastPage;
+		}
+		List<Teacher> list = teacherService.getTeacherList(currentPage, rowPerPage, searchWord);
 		model.addAttribute("list", list);
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("page", page);
+		model.addAttribute("searchWord", searchWord);
 		return "employee/teacher/teacherList";
 	}
 }

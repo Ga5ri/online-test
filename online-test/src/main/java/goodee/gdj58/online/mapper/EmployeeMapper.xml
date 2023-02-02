@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.EmployeeMapper">
+	<select id="countEmp" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(*) FROM employee
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				emp_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
 	<update id="updateEmployeePw" parameterType="java.util.Map">
 		UPDATE employee 
 		SET emp_pw = PASSWORD(#{newPw})
@@ -34,13 +43,17 @@
 		)
 	</insert>
 	
-	
 	<select id="selectEmployeeList" resultType="goodee.gdj58.online.vo.Employee" parameterType="java.util.Map">
 		SELECT
 			emp_no	empNo <!-- re.getInt("emp_no"), new employee().setEmpNo() 필드명 일치 시키는 단순한 방법(as명사용) resultMap사용해서 설정가능-->
 			, emp_id empId
 			, emp_name empName
 		FROM employee
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				emp_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
 		GROUP BY emp_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>

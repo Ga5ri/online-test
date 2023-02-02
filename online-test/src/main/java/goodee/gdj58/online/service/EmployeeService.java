@@ -19,8 +19,13 @@ import goodee.gdj58.online.vo.Employee;
 public class EmployeeService {
 	// DI 역할 => new EmployeeMapper()
 	@Autowired private EmployeeMapper employeeMapper;
-
 	
+	// 카운트
+	public int countEmp(String searchWord) {
+		return employeeMapper.countEmp(searchWord);
+	}
+	
+	// 사원 수정
 	public int updateEmployeePw(int empNo, String oldPw, String newPw) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("empNo", empNo);
@@ -29,23 +34,28 @@ public class EmployeeService {
 		return employeeMapper.updateEmployeePw(paramMap);
 	}
 	
+	// 로그인
 	public Employee login(Employee emp) {
 		return employeeMapper.login(emp);
 	}
 	
+	// 사원 삭제
 	public int removeEmployee(int empNo) {
 		return employeeMapper.deleteEmployee(empNo);
 	}
 	
+	// 사원 등록
 	public int addEmployee(Employee employee) {
 		return employeeMapper.insertEmployee(employee);
 	}
 	
-	public List<Employee> getEmployeeList(int currentPage, int rowPerPage){
+	// 리스트
+	public List<Employee> getEmployeeList(int currentPage, int rowPerPage, String searchWord){
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("searchWord", searchWord);
 		return employeeMapper.selectEmployeeList(paramMap);
 	}
 }
