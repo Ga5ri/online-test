@@ -7,21 +7,21 @@
 <title></title>
 </head>
 <body>
- 	<h1>학생 추가</h1>
+ 	<h1>강사 추가</h1>
 	<div>${errorMsg}</div>
-	<form method="post" action="${pageContext.request.contextPath}/student/addStudent">
+	<form method="post" action="${pageContext.request.contextPath}/employee/teacher/addTeacher">
 		<table border="1">
 			<tr>
-				<td>studentId</td>
-				<td><input type="text" name="studentId"></td>
+				<td>teacherId</td>
+				<td><input type="text" name="teacherId"></td>
 			</tr>
 			<tr>
-				<td>studentPw</td>
-				<td><input type="password" name="studentPw"></td>
+				<td>teacherPw</td>
+				<td><input type="password" name="teacherPw"></td>
 			</tr>
 			<tr>
-				<td>studentName</td>
-				<td><input type="text" name="studentName"></td>
+				<td>teacherName</td>
+				<td><input type="text" name="teacherName"></td>
 			</tr>	
 		</table>
 		<button type="submit">등록</button>

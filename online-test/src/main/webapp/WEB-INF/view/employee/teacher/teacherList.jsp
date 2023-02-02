@@ -13,7 +13,7 @@
 	</div>
 
 	<h1>강사리스트</h1>
-	<a href="${pageContext.request.contextPath}/teacher/addTeacher">강사등록</a>
+	<a href="${pageContext.request.contextPath}/employee/teacher/addTeacher">강사등록</a>
 	<table border="1">
 		<tr>
 			<th>teacherId</th>
@@ -24,17 +24,17 @@
 			<tr>
 				<td>${t.teacherId}</td>
 				<td>${t.teacherName}</td>
-				<td><a href="${pageContext.request.contextPath}/teacher/removeTeacher?teacherNo=${t.teacherNo}">삭제</a></td>
+				<td><a href="${pageContext.request.contextPath}/employee/teacher/removeTeacher?teacherNo=${t.teacherNo}">삭제</a></td>
 			</tr>
 		</c:forEach>
 	</table>
 	<div>
 		<c:if test="${currentPage > 1}">
-			<a href="${pageContext.request.contextPath}/teacher/teacherList?currentPage=${currentPage-1}">이전</a>
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage-1}">이전</a>
 		</c:if>
 		<span>${currentPage}</span>
 		<c:if test="${currentPage > 0}">
-			<a href="${pageContext.request.contextPath}/teacher/teacherList?currentPage=${currentPage+1}">다음</a>
+			<a href="${pageContext.request.contextPath}/employee/teacher/teacherList?currentPage=${currentPage+1}">다음</a>
 		</c:if>
 	</div>
 </body>

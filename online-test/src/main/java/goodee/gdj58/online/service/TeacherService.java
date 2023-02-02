@@ -28,7 +28,7 @@ public class TeacherService {
 	
 	// 리스트
 	public List<Teacher> getTeacherList(int currentPage, int rowPerPage){
-		int beginRow = (currentPage-1)*rowPerPage;
+		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
