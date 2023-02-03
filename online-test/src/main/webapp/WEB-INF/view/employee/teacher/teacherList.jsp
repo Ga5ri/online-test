@@ -12,7 +12,7 @@
 		<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
 	</div>
 
-	<h1>강사리스트</h1>
+	<h1>Teacher List</h1>
 	<a href="${pageContext.request.contextPath}/employee/teacher/addTeacher">강사등록</a>
 	<table border="1">
 		<tr>
@@ -30,7 +30,7 @@
 	</table>
 	<!-- 검색기능 -->
 	<form method="get" action="${pageContext.request.contextPath}/employee/teacher/teacherList">
-		<input type="text" name="searchWord">
+		<input type="text" name="searchWord" value="${searchWord}">
 		<button type="submit">이름검색</button>
 	</form>
 	

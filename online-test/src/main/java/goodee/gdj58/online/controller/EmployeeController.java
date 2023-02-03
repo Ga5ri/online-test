@@ -3,6 +3,7 @@ package goodee.gdj58.online.controller;
 import java.util.List;
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class EmployeeController {
-	@Autowired 
-	EmployeeService employeeService;
+	@Autowired EmployeeService employeeService;
 	@Autowired IdService idService;
-	
+
 	// 로그인
 	@GetMapping("/loginEmp")
 	public String loginEmp() {

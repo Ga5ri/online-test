@@ -31,7 +31,7 @@
 		
 		<!-- 검색기능 -->
 		<form method="get" action="${pageContext.request.contextPath}/employee/empList">
-			<input type="text" name="searchWord">
+			<input type="text" name="searchWord" value="${searchWord}">
 			<button type="submit">이름검색</button>
 		</form>
 		

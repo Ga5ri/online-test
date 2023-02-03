@@ -1,6 +1,7 @@
 package goodee.gdj58.online.service;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,11 @@ import goodee.gdj58.online.vo.Teacher;
 @Transactional
 public class TeacherService {
 	@Autowired TeacherMapper teacherMapper;
+	
+	// 로그인
+	public Teacher login(Teacher teacher) {
+		return teacherMapper.login(teacher);
+	}
 	
 	// 카운트
 	public int countTeacher(String searchWord) {

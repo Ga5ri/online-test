@@ -9,6 +9,7 @@ import goodee.gdj58.online.vo.Student;
 
 @Mapper
 public interface StudentMapper {
+	Student login(Student student);
 	int countStudent(String searchWord);
 	int deleteStudent(int studentNo);
 	int insertStudent(Student student);
