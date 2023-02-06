@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div>
-	<a href="${pageContext.request.contextPath}/teacher/modifyPw">비밀번호수정</a>
+	<a href="${pageContext.request.contextPath}/teacher/modifyTeacherPw">비밀번호수정</a>
 	
 	<!-- 
 		시험회차(table:test) 관리(시험회차 CRUD)

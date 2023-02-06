@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.StudentMapper">
-	<select id="countStudent" parameterType="java.lang.String" resultType="int">
+	<select id="countSd" parameterType="java.lang.String" resultType="int">
 		SELECT COUNT(*) FROM student
 		<where>
 			<if test="searchWord != null || searchWord != ''">
@@ -10,24 +10,7 @@
 		</where>
 	</select>
 	
-	<delete id="deleteStudent" parameterType="int">
-		DELETE FROM student
-		WHERE student_no = #{studentNo}
-	</delete>
-	
-	<insert id="insertStudent" parameterType="goodee.gdj58.online.vo.Student">
-		INSERT INTO student (
-			student_id
-			, student_pw
-			, student_name
-		) VALUES (
-			#{studentId}
-			, PASSWORD(#{studentPw})
-			, #{studentName}
-		)
-	</insert>
-	
-	<select id="selectStudentList" resultType="goodee.gdj58.online.vo.Student" parameterType="java.util.Map">
+	<select id="selectStudList" resultType="goodee.gdj58.online.vo.Student" parameterType="java.util.Map">
 		SELECT
 			student_no studentNo 
 			, student_id studentId
@@ -40,5 +23,14 @@
 		</where>
 		GROUP BY student_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="loginSd" parameterType="goodee.gdj58.online.vo.Student" resultType="goodee.gdj58.online.vo.Student">
+		SELECT
+			student_no studentNo 
+			, student_id studentId
+			, student_name studentName
+		FROM student
+		WHERE student_id = #{studentId} AND student_pw = PASSWORD(#{studentPw})
 	</select>
 </mapper>

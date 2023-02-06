@@ -1,5 +1,7 @@
 package goodee.gdj58.online.service;
 
+
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,34 +12,30 @@ import org.springframework.transaction.annotation.Transactional;
 
 import goodee.gdj58.online.mapper.StudentMapper;
 import goodee.gdj58.online.vo.Student;
+import goodee.gdj58.online.vo.Test;
+
 
 @Service
 @Transactional
 public class StudentService {
 	@Autowired StudentMapper studentMapper;
-	
-	// 카운트
-	public int countStudent(String searchWord) {
-		return studentMapper.countStudent(searchWord);
-	}
-	
-	// 삭제
-	public int removeStudent(int studentNo) {
-		return studentMapper.deleteStudent(studentNo);
-	}
-	
-	// 등록
-	public int addStudent(Student student) {
-		return studentMapper.insertStudent(student);
-	}
-	
 	// 리스트
-	public List<Student> getStudentList(int currentPage, int rowPerPage, String searchWord) {
+	public List<Student> getStudList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchWord", searchWord);
-		return studentMapper.selectStudentList(paramMap);
+		return studentMapper.selectStudList(paramMap);
 	}
+	
+	// 카운트
+	public int countSd(String searchWord) {
+		return studentMapper.countSd(searchWord);
+	}
+	// 로그인
+	public Student login(Student student) {
+		return studentMapper.loginSd(student);
+	}
+
 }

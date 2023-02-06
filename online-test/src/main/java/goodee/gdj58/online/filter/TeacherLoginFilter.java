@@ -16,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j // static Log log = new Log();
 @WebFilter("/teacher/*")
-public class TeacherLoginFilter implements Filter {	@Override
+public class TeacherLoginFilter implements Filter {	
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		
@@ -27,7 +28,7 @@ public class TeacherLoginFilter implements Filter {	@Override
 			HttpSession session = req.getSession();
 			
 			if(session.getAttribute("loginTeacher") == null) {
-				((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/loginTeacher");
+				((HttpServletResponse)response).sendRedirect(req.getContextPath()+"/login");
 				return;
 			}
 		} else {

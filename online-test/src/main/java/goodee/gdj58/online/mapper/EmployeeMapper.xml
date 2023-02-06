@@ -1,6 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.EmployeeMapper">
+	<!-- 학생 Mapper Start -->
+	<select id="countStudent" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(*) FROM student
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				student_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<delete id="deleteStudent" parameterType="int">
+		DELETE FROM student
+		WHERE student_no = #{studentNo}
+	</delete>
+	
+	<insert id="insertStudent" parameterType="goodee.gdj58.online.vo.Student">
+		INSERT INTO student (
+			student_id
+			, student_pw
+			, student_name
+		) VALUES (
+			#{studentId}
+			, PASSWORD(#{studentPw})
+			, #{studentName}
+		)
+	</insert>
+	
+	<select id="selectStudentList" resultType="goodee.gdj58.online.vo.Student" parameterType="java.util.Map">
+		SELECT
+			student_no studentNo 
+			, student_id studentId
+			, student_name studentName
+		FROM student
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				student_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+		GROUP BY student_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 학생 Mapper End -->
+	
+	<!-- 강사 Mapper Start -->
+	<select id="countTeacher" parameterType="java.lang.String" resultType="int">
+		SELECT COUNT(*) FROM teacher
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				teacher_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+	</select>
+	
+	<delete id="deleteTeacher" parameterType="int">
+		DELETE FROM teacher
+		WHERE teacher_no = #{teacherNo}
+	</delete>
+	
+	<insert id="insertTeacher" parameterType="goodee.gdj58.online.vo.Teacher">
+		INSERT INTO teacher (
+			teacher_id
+			, teacher_pw
+			, teacher_name
+		) VALUES (
+			#{teacherId}
+			, PASSWORD(#{teacherPw})
+			, #{teacherName}
+		)
+	</insert>
+	
+	<select id="selectTeacherList" resultType="goodee.gdj58.online.vo.Teacher" parameterType="java.util.Map">
+		SELECT
+			teacher_no	teacherNo
+			, teacher_id teacherId
+			, teacher_name teacherName
+		FROM teacher
+		<where>
+			<if test="searchWord != null || searchWord != ''">
+				teacher_name like CONCAT('%', #{searchWord}, '%')
+			</if>
+		</where>
+		GROUP BY teacher_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	<!-- 강사 Mapper End -->
+	
+	<!-- 사원 Mapper Start -->
 	<select id="countEmp" parameterType="java.lang.String" resultType="int">
 		SELECT COUNT(*) FROM employee
 		<where>
@@ -57,4 +144,5 @@
 		GROUP BY emp_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
+	<!-- 사원 Mapper End -->
 </mapper>
