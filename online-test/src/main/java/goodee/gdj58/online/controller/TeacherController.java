@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.TeacherService;
+import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
 import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
@@ -31,6 +32,32 @@ import lombok.extern.slf4j.Slf4j;
 public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;	
+	
+	// 시험문제별 상세보기
+	@GetMapping("/teacher/questionOne")
+	public String questionOne(Model model, int questionNo, String questionTitle) {
+
+		List<Question> list = teacherService.getQuestionOne(questionNo, questionTitle);
+		model.addAttribute("list", list);
+		model.addAttribute("questionNo", questionNo);
+		model.addAttribute("questionTitle", questionTitle);
+		log.debug("\u001B[31m"+list+"<--questionlist");
+		log.debug("\u001B[31m"+questionNo+"<--questionNo");
+		return "teacher/questionOne";
+	}
+	
+	// 시험회차별 상세보기
+	@GetMapping("/teacher/testOne")
+	public String testOne(Model model, int testNo, String testTitle) {
+
+		List<Test> list = teacherService.getTestOne(testNo, testTitle);
+		model.addAttribute("list", list);
+		model.addAttribute("testNo", testNo);
+		model.addAttribute("testTitle", testTitle);
+		log.debug("\u001B[31m"+list+"<--testlist");
+		log.debug("\u001B[31m"+testNo+"<--testNo");
+		return "teacher/testOne";
+	}
 	
 	// 시험 등록
 	@GetMapping("/teacher/addTest")
@@ -51,7 +78,7 @@ public class TeacherController {
 	@GetMapping("/teacher/testList")
 	public String testList(Model model) {
 
-		List<goodee.gdj58.online.vo.Test> list = teacherService.getTestList();
+		List<Test> list = teacherService.getTestList();
 		model.addAttribute("list", list);
 
 		return "teacher/testList";

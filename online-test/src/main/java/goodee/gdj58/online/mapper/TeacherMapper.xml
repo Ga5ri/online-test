@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			q.question_no questionNo
+			, q.question_idx questionIdx
+			, q.question_title questionTitle
+			, e.example_idx exampleIdx
+			, e.example_title exampleTitle
+			, e.example_ox exampleOx
+		FROM question q INNER JOIN example e
+		ON q.question_no = e.question_no
+		WHERE q.question_no = #{questionNo} AND q.question_title = #{questionTitle}
+		ORDER BY q.question_no DESC
+	</select>
+	
+	<select id="testOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			t.test_no testNo
+			, t.test_title testTitle
+			, q.question_no questionNo
+			, q.question_idx questionIdx
+			, q.question_title questionTitle
+		FROM test t INNER JOIN question q
+		ON t.test_no = q.test_no
+		WHERE t.test_no = #{testNo} AND t.test_title = #{testTitle}
+		ORDER BY t.test_no DESC
+	</select>
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
 		INSERT INTO test(
 			test_title

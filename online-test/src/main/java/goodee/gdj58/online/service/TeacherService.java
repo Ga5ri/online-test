@@ -11,15 +11,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import goodee.gdj58.online.controller.TeacherController;
 import goodee.gdj58.online.mapper.TeacherMapper;
+import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
 import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 @Transactional
 public class TeacherService {
 	@Autowired TeacherMapper teacherMapper;
+	
+	// 시험회차별 상세보기
+	public List<Question> getQuestionOne(int questionNo, String questionTitle) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("questionNo", questionNo);
+		paramMap.put("questionTitle", questionTitle);
+		log.debug("\u001B[31m"+questionNo+"<--questionNoService");
+		return teacherMapper.questionOne(paramMap);
+	}
+		
+		
+	// 시험회차별 상세보기
+	public List<Test> getTestOne(int testNo, String testTitle) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("testNo", testNo);
+		paramMap.put("testTitle", testTitle);
+		log.debug("\u001B[31m"+testTitle+"<--testTitleService");
+		return teacherMapper.testOne(paramMap);
+	}
 	
 	// 시험 등록
 	public int addTest(Test test) {

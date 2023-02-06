@@ -18,7 +18,11 @@
 		<c:forEach var="t" items="${list}">	
 			<tr>
 				<td>${t.testNo}</td>
-				<td>${t.testTitle}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/teacher/testOne?testNo=${t.testNo}&testTitle=${t.testTitle}">
+						${t.testTitle}
+					</a>
+				</td>
 				<td>${t.testDate}</td>
 			</tr>
 		</c:forEach>
