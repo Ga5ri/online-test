@@ -88,17 +88,17 @@ public class TeacherController {
 		if(row == 1) {
 			log.debug("등록성공");
 		}
-		return "redirect:/teacher/testList";	// sendRedirect, CM -> C
+		return "redirect:/teacher/testListByTeacher";	// sendRedirect, CM -> C
 	}
 	
 	// 시험 리스트
-	@GetMapping("/teacher/testList")
+	@GetMapping("/teacher/testListByTeacher")
 	public String testList(Model model) {
 
 		List<Test> list = teacherService.getTestList();
 		model.addAttribute("list", list);
 
-		return "teacher/testList";
+		return "teacher/testListByTeacher";
 	}
 	
 	// 강사 pw 수정

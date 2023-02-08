@@ -46,7 +46,7 @@ public class LoginController {
 		} else if(resultStudent != null) {
 			session.setAttribute("loginStudent", resultStudent);
 			log.debug("\u001B[31m"+resultStudent+"<--loginStudent");
-			return "redirect:/student/studentList";
+			return "redirect:/student/testListByStudent";
 		}
 		return "redirect:/student/studentList";	// sendRedirect, CM -> C
 	}

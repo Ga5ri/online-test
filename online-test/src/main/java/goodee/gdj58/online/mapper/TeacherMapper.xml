@@ -15,7 +15,8 @@
 			, e.example_idx exampleIdx
 			, e.example_title exampleTitle
 			, e.example_ox exampleOx
-		FROM question q INNER JOIN example e
+		FROM question q 
+		INNER JOIN example e
 		ON q.question_no = e.question_no
 		WHERE q.question_no = #{questionNo} AND q.question_title = #{questionTitle}
 		ORDER BY q.question_no DESC
