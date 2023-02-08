@@ -24,7 +24,11 @@
 							${m.questionTitle}
 						</a>
 					</div>
-				</td>		
+					<div>
+						<a href="${pageContext.request.contextPath}/teacher/modifyQuestionTitle?testNo=${testNo}&testTitle=${testTitle}">수정</a>
+						<a href="${pageContext.request.contextPath}/teacher/modifyQuestionTitle?questionNo=${questionNo}">삭제</a>
+					</div>
+				</td>	
 		</c:forEach>
 		</tr>
 	</table>

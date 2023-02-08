@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+	<update id="updateQuestionTitle" parameterType="java.util.Map">
+		UPDATE question
+		SET question_title = #{questionTitle}
+		WHERE question_idx = #{questionIdx}
+	</update>
+	
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			q.question_no questionNo
@@ -27,6 +33,7 @@
 		WHERE t.test_no = #{testNo} AND t.test_title = #{testTitle}
 		ORDER BY t.test_no DESC
 	</select>
+	
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
 		INSERT INTO test(
 			test_title
@@ -36,6 +43,7 @@
 				, CURDATE()
 			)
 	</insert>
+	
 	<select id="testList" resultType="goodee.gdj58.online.vo.Test" parameterType="java.util.Map">
 		SELECT
 			test_no testNo

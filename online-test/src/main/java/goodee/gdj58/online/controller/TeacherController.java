@@ -32,6 +32,23 @@ import lombok.extern.slf4j.Slf4j;
 public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;	
+	// 시험문제 수정
+	@GetMapping("/teacher/modifyQuestionTitle")
+	public String modifyQuestionTitle(HttpSession session) {
+		// 로그인 안된 상태라면 로그인 폼으로
+		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
+		if(loginTeacher == null) { 
+			return "redirect:/employee/login";
+		}
+		return "teacher/modifyQuestionTitle";
+	}
+	
+	@PostMapping("/teacher/modifyQuestionTitle")
+	public String modifyQuestionTitle(int questionNo, int questionIdx, @RequestParam("questionTitle") String questionTitle) {
+		teacherService.updateQuestionTitle(questionNo, questionIdx, questionTitle);
+		log.debug("\u001B[31m"+questionTitle+"<--questionTitle");
+		return "redirect:/teacher/testOne";
+	}
 	
 	// 시험문제별 상세보기
 	@GetMapping("/teacher/questionOne")
@@ -83,6 +100,7 @@ public class TeacherController {
 
 		return "teacher/testList";
 	}
+	
 	// 강사 pw 수정
 	@GetMapping("/teacher/modifyTeacherPw")
 	public String modifyTeacherPw(HttpSession session) {

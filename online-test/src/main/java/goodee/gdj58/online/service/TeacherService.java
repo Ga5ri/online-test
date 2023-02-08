@@ -23,7 +23,14 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class TeacherService {
 	@Autowired TeacherMapper teacherMapper;
-	
+	// 시험문제 수정
+	public int updateQuestionTitle(int questionNo, int questionIdx, String questionTitle) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("questionNo", questionNo);
+		paramMap.put("questionIdx", questionIdx);
+		paramMap.put("questionTitle", questionTitle);
+		return teacherMapper.updateQuestionTitle(paramMap);
+	}
 	// 시험회차별 상세보기
 	public List<Question> getQuestionOne(int questionNo, String questionTitle) {
 		Map<String, Object> paramMap = new HashMap<>();
