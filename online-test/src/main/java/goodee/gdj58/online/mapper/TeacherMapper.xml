@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.TeacherMapper">
+	<!-- 시험 문제 수정 -->
 	<update id="updateQuestionTitle" parameterType="java.util.Map">
 		UPDATE question
 		SET question_title = #{questionTitle}
 		WHERE question_idx = #{questionIdx}
 	</update>
-	
+	<!-- 시험 문제 상세보기 -->
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			q.question_no questionNo
@@ -21,39 +22,7 @@
 		WHERE q.question_no = #{questionNo} AND q.question_title = #{questionTitle}
 		ORDER BY q.question_no DESC
 	</select>
-	
-	<select id="testOne" resultType="java.util.Map" parameterType="java.util.Map">
-		SELECT
-			t.test_no testNo
-			, t.test_title testTitle
-			, q.question_no questionNo
-			, q.question_idx questionIdx
-			, q.question_title questionTitle
-		FROM test t INNER JOIN question q
-		ON t.test_no = q.test_no
-		WHERE t.test_no = #{testNo} AND t.test_title = #{testTitle}
-		ORDER BY t.test_no DESC
-	</select>
-	
-	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
-		INSERT INTO test(
-			test_title
-			, test_date
-			) VALUE (
-				#{testTitle}
-				, CURDATE()
-			)
-	</insert>
-	
-	<select id="testList" resultType="goodee.gdj58.online.vo.Test" parameterType="java.util.Map">
-		SELECT
-			test_no testNo
-			, test_title testTitle
-			, test_date testDate
-		FROM test
-		ORDER BY test_date DESC
-	</select>
-	
+	<!-- 학생 count -->
 	<select id="countSd" parameterType="java.lang.String" resultType="int">
 		SELECT COUNT(*) FROM student
 		<where>
@@ -62,7 +31,7 @@
 			</if>
 		</where>
 	</select>
-	
+	<!-- 학생 리스트 출력 -->
 	<select id="selectSdList" resultType="goodee.gdj58.online.vo.Student" parameterType="java.util.Map">
 		SELECT
 			student_no studentNo 
@@ -77,13 +46,13 @@
 		GROUP BY student_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
-	
+	<!-- 강사 pw 수정 -->
 	<update id="updateTeacherPw" parameterType="java.util.Map">
 		UPDATE teacher 
 		SET teacher_pw = PASSWORD(#{newPw})
 		WHERE teacher_no = #{teacherNo} AND teacher_pw = PASSWORD(#{oldPw}) 
 	</update>
-	
+	<!-- 강사 login -->
 	<select id="loginTc" parameterType="goodee.gdj58.online.vo.Teacher" resultType="goodee.gdj58.online.vo.Teacher">
 		SELECT
 			teacher_no teacherNo 

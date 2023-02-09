@@ -32,7 +32,7 @@ public class EmployeeController {
 	
 	// 학생 삭제
 	@GetMapping("/employee/student/removeStudent")
-	public String removeStudent(int studentNo) {
+	public String removeStudent(@RequestParam(value="studentNo") int studentNo) {
 		employeeService.removeStudent(studentNo);
 		return "redirect:/employee/student/studentList";
 	}
@@ -92,7 +92,7 @@ public class EmployeeController {
 	
 	// 강사 삭제
 	@GetMapping("/employee/teacher/removeTeacher")
-	public String removeTeacher(int teacherNo) {
+	public String removeTeacher(@RequestParam(value="teacherNo") int teacherNo) {
 		employeeService.removeTeacher(teacherNo);
 		return "redirect:/employee/teacher/teacherList";
 	}

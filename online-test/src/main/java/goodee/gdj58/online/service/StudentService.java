@@ -3,6 +3,7 @@ package goodee.gdj58.online.service;
 
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import goodee.gdj58.online.mapper.StudentMapper;
-import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
-import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,11 +21,11 @@ import lombok.extern.slf4j.Slf4j;
 public class StudentService {
 	@Autowired StudentMapper studentMapper;
 	// 시험회차별 상세보기
-	public List<Student> getQuestionOne(int questionNo, String questionTitle) {
+	public List<Student> getQuestionOne(int testNo, String testTitle) {
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("questionNo", questionNo);
-		paramMap.put("questionTitle", questionTitle);
-		log.debug("\u001B[31m"+questionNo+"<--questionNoService");
+		paramMap.put("testNo", testNo);
+		paramMap.put("testTitle", testTitle);
+		log.debug("\u001B[31m"+testTitle+"<--testTitleService");
 		return studentMapper.selectQuestionByStudent(paramMap);
 	}
 	// 리스트

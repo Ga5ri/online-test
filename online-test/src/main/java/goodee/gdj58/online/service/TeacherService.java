@@ -38,28 +38,7 @@ public class TeacherService {
 		paramMap.put("questionTitle", questionTitle);
 		log.debug("\u001B[31m"+questionNo+"<--questionNoService");
 		return teacherMapper.questionOne(paramMap);
-	}
-		
-		
-	// 시험회차별 상세보기
-	public List<Test> getTestOne(int testNo, String testTitle) {
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("testNo", testNo);
-		paramMap.put("testTitle", testTitle);
-		log.debug("\u001B[31m"+testTitle+"<--testTitleService");
-		return teacherMapper.testOne(paramMap);
-	}
-	
-	// 시험 등록
-	public int addTest(Test test) {
-		return teacherMapper.insertTest(test);
-	}
-	
-	// 리스트
-	public List<Test> getTestList() {
-		Map<String, Object> paramMap = new HashMap<>();
-		return teacherMapper.testList(paramMap);
-	}
+	}				
 	
 	// 카운트
 	public int countSd(String searchWord) {

@@ -4,6 +4,8 @@ package goodee.gdj58.online.controller;
 
 import java.util.List;
 
+
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.StudentService;
-import goodee.gdj58.online.service.TeacherService;
-import goodee.gdj58.online.vo.Question;
+import goodee.gdj58.online.service.TestService;
 import goodee.gdj58.online.vo.Student;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -24,25 +25,27 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class StudentController {
 	@Autowired StudentService studentService;
-	@Autowired TeacherService teacherService;
+	@Autowired TestService testService;
 	@Autowired IdService idService;
 	// 시험문제별 상세보기
 	@GetMapping("/student/takeQuestion")
-	public String questionOne(Model model, int questionNo, String questionTitle) {
+	public String questionOne(Model model
+								, @RequestParam(value="testNo") int testNo
+								, @RequestParam(value="testTitle") String testTitle) {
 
-		List<Student> list = studentService.getQuestionOne(questionNo, questionTitle);
+		List<Student> list = studentService.getQuestionOne(testNo, testTitle);
 		model.addAttribute("list", list);
-		model.addAttribute("questionNo", questionNo);
-		model.addAttribute("questionTitle", questionTitle);
+		model.addAttribute("testNo", testNo);
+		model.addAttribute("testTitle", testTitle);
 		log.debug("\u001B[31m"+list+"<--questionlist");
-		log.debug("\u001B[31m"+questionNo+"<--questionNo");
+		log.debug("\u001B[31m"+testTitle+"<--testTitle");
 		return "student/takeQuestion";
 	}
 	// 시험 리스트
 	@GetMapping("/student/testListByStudent")
 	public String testList(Model model) {
 
-		List<Test> list = teacherService.getTestList();
+		List<Test> list = testService.getTestList();
 		model.addAttribute("list", list);
 
 		return "student/testListByStudent";

@@ -25,7 +25,7 @@
 				<td>${t.testNo}</td>
 				<td>${t.testTitle}</td>
 				<td>${t.testDate}</td>
-				<td><a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}">응시하기</a></td>
+				<td><a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}&testTitle=${t.testTitle}">응시하기</a></td>
 			</tr>
 		</c:forEach>
 	</table>

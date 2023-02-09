@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.TestMapper">
+	<!-- 시험회차별 상세보기 -->
+	<select id="testOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			t.test_no testNo
+			, t.test_title testTitle
+			, q.question_no questionNo
+			, q.question_idx questionIdx
+			, q.question_title questionTitle
+		FROM test t 
+		INNER JOIN question q
+		ON t.test_no = q.test_no
+		WHERE t.test_no = #{testNo} AND t.test_title = #{testTitle}
+		ORDER BY t.test_no DESC
+	</select>
+	<!-- 시험 추가 -->
+	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
+		INSERT INTO test(
+			test_title
+			, test_date
+			) VALUE (
+				#{testTitle}
+				, CURDATE()
+			)
+	</insert>
+	<!-- 시험 목록 -->
+	<select id="testList" resultType="goodee.gdj58.online.vo.Test" parameterType="java.util.Map">
+		SELECT
+			test_no testNo
+			, test_title testTitle
+			, test_date testDate
+		FROM test
+		ORDER BY test_date DESC
+	</select>
+</mapper>

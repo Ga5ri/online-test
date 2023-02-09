@@ -9,6 +9,7 @@
 <body>
 	<h1>시험 상세정보</h1>
 	<div style="text-align:center"><strong>${testNo} 회차 ${testTitle} 시험</strong></div>
+	<a href="${pageContext.request.contextPath}/teacher/addQuestion">문제 추가</a>
 	<table border="1">
 		<tr>
 		<c:forEach var="m" items="${list}" varStatus="s">

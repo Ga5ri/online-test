@@ -7,34 +7,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>시험</h1>
-	<table border="1">
-		<tr>
-		<c:forEach var="m" items="${list}" varStatus="s">
-			<!-- td 5개 줄바꿈 -->
-			<c:if test="${s.index != 0 && s.index % 5 == 0}">
-				</tr><tr>
-			</c:if>
-				<td>			
-					<div>문제 번호 : ${m.questionIdx}</div>
-					<div>문제 : ${m.questionTitle}</div>
+	<h1>${testNo}회차 시험명:${testTitle}</h1>
+		<c:forEach var="m" items="${list}">
+					<c:if test="${m.exampleIdx == 1}">
+						${m.questionIdx} 문제 : ${m.questionTitle}
+					</c:if>
 					<div>
 						<c:if test="${m.exampleIdx == 1}">
-							<input type="radio" name="${m.exampleIdx}" value="1">${m.exampleTitle}
+							<input type="radio" name="answer${exampleIdx}" value="1">1. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 2}">
-							<input type="radio" name="${m.exampleIdx}" value="2">${m.exampleTitle}
+							<input type="radio" name="answer${exampleIdx}" value="2">2. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 3}">
-							<input type="radio" name="${m.exampleIdx}" value="3">${m.exampleTitle}
+							<input type="radio" name="answer${exampleIdx}" value="3">3. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 4}">
-							<input type="radio" name="${m.exampleIdx}" value="4">${m.exampleTitle}
+							<input type="radio" name="answer${exampleIdx}" value="4">4. ${m.exampleTitle}
 						</c:if>
 					</div>
-				</td>	
+
 		</c:forEach>
-		</tr>
-	</table>
+
 </body>
 </html>

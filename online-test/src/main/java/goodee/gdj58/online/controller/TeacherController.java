@@ -44,7 +44,9 @@ public class TeacherController {
 	}
 	
 	@PostMapping("/teacher/modifyQuestionTitle")
-	public String modifyQuestionTitle(int questionNo, int questionIdx, @RequestParam("questionTitle") String questionTitle) {
+	public String modifyQuestionTitle(@RequestParam("questionNo") int questionNo
+										, @RequestParam("questionIdx") int questionIdx
+										, @RequestParam("questionTitle") String questionTitle) {
 		teacherService.updateQuestionTitle(questionNo, questionIdx, questionTitle);
 		log.debug("\u001B[31m"+questionTitle+"<--questionTitle");
 		return "redirect:/teacher/testOne";
@@ -52,7 +54,9 @@ public class TeacherController {
 	
 	// 시험문제별 상세보기
 	@GetMapping("/teacher/questionOne")
-	public String questionOne(Model model, int questionNo, String questionTitle) {
+	public String questionOne(Model model
+								, @RequestParam("questionNo") int questionNo
+								, @RequestParam("questionTitle") String questionTitle) {
 
 		List<Question> list = teacherService.getQuestionOne(questionNo, questionTitle);
 		model.addAttribute("list", list);
@@ -62,45 +66,7 @@ public class TeacherController {
 		log.debug("\u001B[31m"+questionNo+"<--questionNo");
 		return "teacher/questionOne";
 	}
-	
-	// 시험회차별 상세보기
-	@GetMapping("/teacher/testOne")
-	public String testOne(Model model, int testNo, String testTitle) {
 
-		List<Test> list = teacherService.getTestOne(testNo, testTitle);
-		model.addAttribute("list", list);
-		model.addAttribute("testNo", testNo);
-		model.addAttribute("testTitle", testTitle);
-		log.debug("\u001B[31m"+list+"<--testlist");
-		log.debug("\u001B[31m"+testNo+"<--testNo");
-		return "teacher/testOne";
-	}
-	
-	// 시험 등록
-	@GetMapping("/teacher/addTest")
-	public String addTest() {
-		return "teacher/addTest";
-	}
-	
-	@PostMapping("/teacher/addTest")
-	public String addTest(Test test) {	
-		int row = teacherService.addTest(test);
-		if(row == 1) {
-			log.debug("등록성공");
-		}
-		return "redirect:/teacher/testListByTeacher";	// sendRedirect, CM -> C
-	}
-	
-	// 시험 리스트
-	@GetMapping("/teacher/testListByTeacher")
-	public String testList(Model model) {
-
-		List<Test> list = teacherService.getTestList();
-		model.addAttribute("list", list);
-
-		return "teacher/testListByTeacher";
-	}
-	
 	// 강사 pw 수정
 	@GetMapping("/teacher/modifyTeacherPw")
 	public String modifyTeacherPw(HttpSession session) {
