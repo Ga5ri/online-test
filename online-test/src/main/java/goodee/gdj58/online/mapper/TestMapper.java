@@ -11,5 +11,7 @@ import goodee.gdj58.online.vo.Test;
 public interface TestMapper {
 	List<Test> testOne(Map<String, Object> paramMap);
 	int insertTest(Test test);
+	int updateTest(Test test);
+	int deleteTest(int testNo);
 	List<Test> testList(Map<String, Object> paramMap);
 }

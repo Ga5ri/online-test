@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.QuestionMapper">
+<!-- 시험 문제 등록 -->
 <insert id="insertQuestion" parameterType="goodee.gdj58.online.vo.Question">
 		INSERT INTO question(
 			test_no
 			, question_idx
 			, question_title
-			) VALUE (
+			) VALUES (
 				#{testNo}
 				, #{questionIdx}
 				, #{questionTitle}

@@ -12,9 +12,10 @@
 		FROM test t 
 		INNER JOIN question q
 		ON t.test_no = q.test_no
-		WHERE t.test_no = #{testNo} AND t.test_title = #{testTitle}
+		WHERE t.test_no = #{testNo}
 		ORDER BY t.test_no DESC
 	</select>
+	
 	<!-- 시험 추가 -->
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
 		INSERT INTO test(
@@ -22,9 +23,24 @@
 			, test_date
 			) VALUE (
 				#{testTitle}
-				, CURDATE()
+				, #{testDate}
 			)
 	</insert>
+	
+	<!-- 시험 수정 -->
+	<update id="updateTest" parameterType="goodee.gdj58.online.vo.Test">
+		UPDATE test 
+		SET test_title = #{testTitle}
+			, test_date = #{testDate}
+		WHERE test_no = #{testNo}
+	</update>
+	
+	<!-- 시험 삭제 -->
+	<delete id="deleteTest" parameterType="int">
+		DELETE FROM test
+		WHERE test_no = #{testNo}
+	</delete>
+	
 	<!-- 시험 목록 -->
 	<select id="testList" resultType="goodee.gdj58.online.vo.Test" parameterType="java.util.Map">
 		SELECT

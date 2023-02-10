@@ -7,5 +7,5 @@ import goodee.gdj58.online.vo.Test;
 
 @Mapper
 public interface QuestionMapper {
-	int insertQuestion(Question question, int testNo);
+	int insertQuestion(Question question);
 }

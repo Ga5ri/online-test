@@ -7,20 +7,21 @@
 <title></title>
 </head>
 <body>
-	<h1>시험 등록</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/addTest">
+	<h1>시험 수정</h1>
+	<form method="post" action="${pageContext.request.contextPath}/teacher/modifyTest">
+	<input type="hidden" name="testNo" value="${testNo}">
 		<table border="1">
 			<tr>
-				<td>시험 제목</td>
+				<th>시험명</th>
 				<td><input type="text" name="testTitle"></td>
 			</tr>
 			<tr>
-				<td>시험 일정</td>
+				<th>시험 일자</th>
 				<td><input type="date" name="testDate"></td>
 			</tr>
 		</table>
 		<div>
-			<button type="submit">등록하기</button>
+			<button type="submit">수정하기</button>
 		</div>
 	</form>
 </body>

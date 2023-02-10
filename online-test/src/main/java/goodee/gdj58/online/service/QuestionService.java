@@ -12,8 +12,8 @@ import goodee.gdj58.online.vo.Question;
 @Transactional
 public class QuestionService {
 	@Autowired QuestionMapper questionMapper;
-	// 시험 등록
-	public int addQuestion(Question question, int testNo) {
-		return questionMapper.insertQuestion(question, testNo);
+	// 시험 문제 추가
+	public int addQuestion(Question question) {
+		return questionMapper.insertQuestion(question);
 	}
 }

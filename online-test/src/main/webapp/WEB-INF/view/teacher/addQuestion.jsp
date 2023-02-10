@@ -12,15 +12,15 @@
 		<table border="1">		
 			<tr>
 				<td>시험 회차 번호</td>
-				<td><input type="text" name="testNo" value="${testNo}"></td>
+				<td><input type="number" name="testNo" value="${testNo}" readonly="readonly"></td>
 			</tr>		
 			<tr>
 				<td>시험 문제 번호</td>
-				<td><input type="text" name="questionIdx"></td>
+				<td><input type="number" name="questionIdx"></td>
 			</tr>
 			<tr>
 				<td>시험 문제</td>
-				<td><input type="text" name="questionTitle"></td>
+				<td><textarea rows="3" cols="20" name="questionTitle"></textarea></td>
 			</tr>
 		</table>
 		<button type="submit">등록하기</button>

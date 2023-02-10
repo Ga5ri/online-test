@@ -2,6 +2,8 @@ package goodee.gdj58.online.controller;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,18 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 public class TestController {
 	@Autowired TestService testService;
 	@Autowired IdService idService;
+	
 	// 시험회차별 상세보기
 	@GetMapping("/teacher/testOne")
-	public String testOne(Model model
-							, @RequestParam(value="testNo") int testNo
-							, @RequestParam(value="testTitle") String testTitle) {
+	public String testOne(Model model, @RequestParam(value="testNo") int testNo) {
 
-		List<Test> list = testService.getTestOne(testNo, testTitle);
+		List<Test> list = testService.getTestOne(testNo);
 		model.addAttribute("list", list);
 		model.addAttribute("testNo", testNo);
-		model.addAttribute("testTitle", testTitle);
 		log.debug("\u001B[31m"+list+"<--testlist");
-		log.debug("\u001B[31m"+testNo+"<--testNo");
 		return "teacher/testOne";
 	}
 	
@@ -47,6 +46,31 @@ public class TestController {
 			log.debug("등록성공");
 		}
 		return "redirect:/teacher/testListByTeacher";	// sendRedirect, CM -> C
+	}
+	
+	// 시험 수정
+	@GetMapping("/teacher/modifyTest")
+	public String modifyTest(Model model, @RequestParam(value="testNo") int testNo) {
+		model.addAttribute("testNo", testNo);
+		return "teacher/modifyTest";
+	}
+	@PostMapping("/teacher/modifyTest")
+	public String modifyTest(Test test) {	
+		int row = testService.modifyTest(test);
+		if(row == 1) {
+			log.debug("수정성공");
+		}
+		return "redirect:/teacher/testListByTeacher";	// sendRedirect, CM -> C
+	}
+	
+	// 시험 삭제
+	@GetMapping("/teacher/removeTest")
+	public String removeTest(@RequestParam("testNo") int testNo) {
+		int row = testService.removeTest(testNo);
+		if(row == 1) {
+			log.debug("삭제성공");
+		}
+		return "redirect:/teacher/testListByTeacher";
 	}
 	
 	// 시험 리스트
