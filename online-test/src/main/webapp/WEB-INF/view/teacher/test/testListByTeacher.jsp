@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>시험 관리</h1>
-	<a href="${pageContext.request.contextPath}/teacher/addTest">시험 등록</a>
+	<a href="${pageContext.request.contextPath}/teacher/test/addTest">시험 등록</a>
 	<table border="1">
 		<tr>
 			<th>시험 번호</th>
@@ -20,13 +20,13 @@
 			<tr>
 				<td>${t.testNo}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/teacher/testOne?testNo=${t.testNo}">
+					<a href="${pageContext.request.contextPath}/teacher/question/questionOne?testNo=${t.testNo}">
 						${t.testTitle}
 					</a>
 				</td>
 				<td>${t.testDate}</td>
 				<td>
-					<a href="${pageContext.request.contextPath}/teacher/modifyTest?testNo=${t.testNo}">수정</a>
+					<a href="${pageContext.request.contextPath}/teacher/test/modifyTest?testNo=${t.testNo}">수정</a>
 					<a href="${pageContext.request.contextPath}/teacher/removeTest?testNo=${t.testNo}">삭제</a>
 				</td>
 			</tr>

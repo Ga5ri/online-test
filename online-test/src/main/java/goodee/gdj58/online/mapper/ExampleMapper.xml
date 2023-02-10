@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.ExampleMapper">
+<!-- 시험 문제 상세보기 -->
+	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			q.question_no questionNo
+			, q.question_idx questionIdx
+			, q.question_title questionTitle
+			, e.example_idx exampleIdx
+			, e.example_title exampleTitle
+			, e.example_ox exampleOx
+		FROM question q 
+		INNER JOIN example e
+		ON q.question_no = e.question_no
+		WHERE q.question_no = #{questionNo} AND q.question_title = #{questionTitle}
+		ORDER BY q.question_no DESC
+	</select>
+</mapper>

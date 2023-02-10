@@ -12,8 +12,6 @@ import goodee.gdj58.online.vo.Teacher;
 
 @Mapper
 public interface TeacherMapper {
-	int updateQuestionTitle(Map<String, Object> paramMap);
-	List<Question> questionOne(Map<String, Object> paramMap);
 	int countSd(String searchWord);
 	List<Student> selectSdList(Map<String, Object> paramMap);
 	int updateTeacherPw(Map<String, Object> paramMap);

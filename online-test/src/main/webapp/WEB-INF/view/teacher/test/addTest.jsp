@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>시험 등록</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/addTest">
+	<form method="post" action="${pageContext.request.contextPath}/teacher/test/addTest">
 		<table border="1">
 			<tr>
 				<td>시험 제목</td>

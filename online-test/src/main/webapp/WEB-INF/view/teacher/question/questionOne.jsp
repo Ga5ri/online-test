@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>시험 상세정보</h1>
-	<div style="text-align:center"><strong>${testNo} 회차 ${testTitle} 시험</strong></div>
+	<div style="text-align:center"><strong>${testNo} 회차 ${testTitle}${questionNo} 시험</strong></div>
 	<a href="${pageContext.request.contextPath}/teacher/addQuestion?testNo=${testNo}">문제 추가</a>
 	<table border="1">
 		<tr>
@@ -21,13 +21,13 @@
 					<div>문제 번호 : ${m.questionIdx}</div>
 					<div>
 						문제 : 
-						<a href="${pageContext.request.contextPath}/teacher/questionOne?questionNo=${m.questionNo}&questionTitle=${m.questionTitle}">
+						<a href="${pageContext.request.contextPath}/teacher/exampleOne?questionNo=${m.questionNo}&questionTitle=${m.questionTitle}">
 							${m.questionTitle}
 						</a>
 					</div>
 					<div>
-						<a href="${pageContext.request.contextPath}/teacher/modifyQuestionTitle?testNo=${testNo}&testTitle=${testTitle}">수정</a>
-						<a href="${pageContext.request.contextPath}/teacher/modifyQuestionTitle?questionNo=${questionNo}">삭제</a>
+						<a href="${pageContext.request.contextPath}/teacher/question/modifyQuestion?questionNo=${m.questionNo}&testNo=${testNo}&questionTitle=${m.questionTitle}">수정</a>
+						<a href="${pageContext.request.contextPath}/teacher/modifyQuestion?questionNo=${m.questionNo}">삭제</a>
 					</div>
 				</td>	
 		</c:forEach>

@@ -26,8 +26,6 @@
 							<input type="radio" name="answer${exampleIdx}" value="4">4. ${m.exampleTitle}
 						</c:if>
 					</div>
-
 		</c:forEach>
-
 </body>
 </html>

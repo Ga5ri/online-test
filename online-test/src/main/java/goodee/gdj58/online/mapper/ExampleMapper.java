@@ -6,12 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import goodee.gdj58.online.vo.Question;
-import goodee.gdj58.online.vo.Test;
-
 @Mapper
-public interface QuestionMapper {
-	int updateQuestionTitle(Map<String, Object> paramMap);
+public interface ExampleMapper {
 	List<Question> questionOne(Map<String, Object> paramMap);
-	int insertQuestion(Question question);
-	int updateQuestion(Map<String, Object> paramMap);
 }

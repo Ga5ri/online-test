@@ -32,40 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 public class TeacherController {
 	@Autowired TeacherService teacherService;
 	@Autowired IdService idService;	
-	// 시험문제 수정
-	@GetMapping("/teacher/modifyQuestionTitle")
-	public String modifyQuestionTitle(HttpSession session) {
-		// 로그인 안된 상태라면 로그인 폼으로
-		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
-		if(loginTeacher == null) { 
-			return "redirect:/employee/login";
-		}
-		return "teacher/modifyQuestionTitle";
-	}
-	
-	@PostMapping("/teacher/modifyQuestionTitle")
-	public String modifyQuestionTitle(@RequestParam("questionNo") int questionNo
-										, @RequestParam("questionIdx") int questionIdx
-										, @RequestParam("questionTitle") String questionTitle) {
-		teacherService.updateQuestionTitle(questionNo, questionIdx, questionTitle);
-		log.debug("\u001B[31m"+questionTitle+"<--questionTitle");
-		return "redirect:/teacher/testOne";
-	}
-	
-	// 시험문제별 상세보기
-	@GetMapping("/teacher/questionOne")
-	public String questionOne(Model model
-								, @RequestParam("questionNo") int questionNo
-								, @RequestParam("questionTitle") String questionTitle) {
-
-		List<Question> list = teacherService.getQuestionOne(questionNo, questionTitle);
-		model.addAttribute("list", list);
-		model.addAttribute("questionNo", questionNo);
-		model.addAttribute("questionTitle", questionTitle);
-		log.debug("\u001B[31m"+list+"<--questionlist");
-		log.debug("\u001B[31m"+questionNo+"<--questionNo");
-		return "teacher/questionOne";
-	}
 
 	// 강사 pw 수정
 	@GetMapping("/teacher/modifyTeacherPw")

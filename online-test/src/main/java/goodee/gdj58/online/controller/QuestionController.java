@@ -1,6 +1,7 @@
 package goodee.gdj58.online.controller;
 
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.QuestionService;
 import goodee.gdj58.online.vo.Question;
+import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,17 +24,47 @@ public class QuestionController {
 	@Autowired IdService idService;
 	
 	// 시험 문제 추가
-	@GetMapping("/teacher/addQuestion")
+	@GetMapping("/teacher/question/addQuestion")
 	public String addQuestion(Model model, @RequestParam(value="testNo") int testNo) {		
 		model.addAttribute("testNo", testNo);
 		log.debug("\u001B[31m"+testNo+"<--testNoByQuestion");
-		return "teacher/addQuestion";
+		return "teacher/question/addQuestion";
 	}
 	
-	@PostMapping("/teacher/addQuestion")
+	@PostMapping("/teacher/question/addQuestion")
 	public String addQuestion(Question question, @RequestParam(value="testNo") int testNo) {	
 		questionService.addQuestion(question);
 	
-		return "redirect:/teacher/testOne?testNo="+testNo;	// sendRedirect, CM -> C
+		return "redirect:/teacher/question/questionOne?testNo="+testNo;	// sendRedirect, CM -> C
 	}
+	
+	// 문제 수정
+	@GetMapping("/teacher/question/modifyQuestion")
+	public String modifyQuestion(Model model
+									, @RequestParam(value="questionNo") int questionNo) {
+		model.addAttribute("questionNo", questionNo);
+		log.debug("\u001B[31m"+questionNo+"<--questionNoByQuestion");
+		return "teacher/question/modifyQuestion";
+	}
+	@PostMapping("/teacher/question/modifyQuestion")
+	public String modifyQuestion(@RequestParam(value="questionNo") int questionNo
+									, @RequestParam(value="questionIdx") int questionIdx
+									, @RequestParam(value="questionTitle") String questionTitle) {	
+		int row = questionService.modifyQuestion(questionNo, questionIdx, questionTitle);
+		if(row == 1) {
+			log.debug("수정성공");
+		}
+		return "redirect:/teacher/question/testOne";	// sendRedirect, CM -> C
+	}
+	// 시험회차별 상세보기
+	@GetMapping("/teacher/question/questionOne")
+	public String questionOne(Model model, @RequestParam(value="testNo") int testNo) {
+
+		List<Question> list = questionService.getQuestionOne(testNo);
+		model.addAttribute("list", list);
+		model.addAttribute("testNo", testNo);
+		log.debug("\u001B[31m"+list+"<--testlist");
+		return "teacher/question/questionOne";
+	}
+	
 }

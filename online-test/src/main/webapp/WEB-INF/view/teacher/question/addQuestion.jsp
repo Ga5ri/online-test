@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>시험 문제 등록</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/addQuestion">
+	<form method="post" action="${pageContext.request.contextPath}/teacher/question/addQuestion">
 		<table border="1">		
 			<tr>
 				<td>시험 회차 번호</td>

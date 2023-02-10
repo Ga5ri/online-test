@@ -9,7 +9,6 @@ import goodee.gdj58.online.vo.Test;
 
 @Mapper
 public interface TestMapper {
-	List<Test> testOne(Map<String, Object> paramMap);
 	int insertTest(Test test);
 	int updateTest(Test test);
 	int deleteTest(int testNo);

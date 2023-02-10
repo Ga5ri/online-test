@@ -16,13 +16,6 @@ import goodee.gdj58.online.vo.Test;
 @Transactional
 public class TestService {
 	@Autowired TestMapper testMapper;
-	// 시험회차별 상세보기
-	public List<Test> getTestOne(int testNo) {
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("testNo", testNo);
-		return testMapper.testOne(paramMap);
-	}
-	
 	// 시험 등록
 	public int addTest(Test test) {
 		return testMapper.insertTest(test);
