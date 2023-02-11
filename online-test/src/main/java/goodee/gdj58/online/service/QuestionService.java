@@ -32,6 +32,14 @@ public class QuestionService {
 		return questionMapper.updateQuestion(paramMap);
 	}
 	// 시험회차별 상세보기
+	public List<Question> getQuestionList(int questionNo, int questionIdx, String questionTitle) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("questionNo", questionNo);
+		paramMap.put("questionIdx", questionIdx);
+		paramMap.put("questionTitle", questionTitle);
+		return questionMapper.questionOne(paramMap);
+	}
+	// 시험회차별 상세보기
 	public List<Question> getQuestionOne(int testNo) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("testNo", testNo);

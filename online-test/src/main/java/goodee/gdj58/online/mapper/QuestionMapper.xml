@@ -21,6 +21,13 @@
 			, question_title = #{questionTitle}
 		WHERE question_no = #{questionNo}
 	</update>
+	<select id="questionList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT
+			question_idx questionIdx
+			, question_title questionTitle
+		FROM question
+		WHERE question_no = #{questionNo}
+	</select>
 	
 	<!-- 시험회차별 상세보기 -->
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">

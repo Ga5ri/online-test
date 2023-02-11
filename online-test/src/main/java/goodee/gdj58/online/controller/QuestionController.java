@@ -41,7 +41,11 @@ public class QuestionController {
 	// 문제 수정
 	@GetMapping("/teacher/question/modifyQuestion")
 	public String modifyQuestion(Model model
-									, @RequestParam(value="questionNo") int questionNo) {
+									, @RequestParam(value="questionNo") int questionNo
+									, @RequestParam(value="questionIdx") int questionIdx
+									, @RequestParam(value="questionTitle") String questionTitle) {
+		List<Question> list = questionService.getQuestionList(questionNo, questionIdx, questionTitle);
+		model.addAttribute("list", list);
 		model.addAttribute("questionNo", questionNo);
 		log.debug("\u001B[31m"+questionNo+"<--questionNoByQuestion");
 		return "teacher/question/modifyQuestion";
