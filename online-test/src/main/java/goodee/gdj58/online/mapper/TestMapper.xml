@@ -3,10 +3,10 @@
 <mapper namespace="goodee.gdj58.online.mapper.TestMapper">
 	<!-- 시험 추가 -->
 	<insert id="insertTest" parameterType="goodee.gdj58.online.vo.Test">
-		INSERT INTO test(
+		INSERT INTO test (
 			test_title
 			, test_date
-			) VALUE (
+			) VALUES (
 				#{testTitle}
 				, #{testDate}
 			)

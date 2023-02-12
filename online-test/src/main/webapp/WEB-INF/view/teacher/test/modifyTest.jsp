@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>시험 수정</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/modifyTest">
+	<form method="post" action="${pageContext.request.contextPath}/teacher/test/modifyTest">
 	<input type="hidden" name="testNo" value="${testNo}">
 		<table border="1">
 			<tr>

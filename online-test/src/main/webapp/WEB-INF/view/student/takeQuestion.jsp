@@ -14,16 +14,16 @@
 					</c:if>
 					<div>
 						<c:if test="${m.exampleIdx == 1}">
-							<input type="radio" name="answer${exampleIdx}" value="1">1. ${m.exampleTitle}
+							<input type="radio" name="answer${m.exampleIdx}" value="1">1. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 2}">
-							<input type="radio" name="answer${exampleIdx}" value="2">2. ${m.exampleTitle}
+							<input type="radio" name="answer${m.exampleIdx}" value="2">2. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 3}">
-							<input type="radio" name="answer${exampleIdx}" value="3">3. ${m.exampleTitle}
+							<input type="radio" name="answer${m.exampleIdx}" value="3">3. ${m.exampleTitle}
 						</c:if>
 						<c:if test="${m.exampleIdx == 4}">
-							<input type="radio" name="answer${exampleIdx}" value="4">4. ${m.exampleTitle}
+							<input type="radio" name="answer${m.exampleIdx}" value="4">4. ${m.exampleTitle}
 						</c:if>
 					</div>
 		</c:forEach>

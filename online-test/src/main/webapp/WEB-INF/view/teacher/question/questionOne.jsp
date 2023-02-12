@@ -21,7 +21,7 @@
 					<div>문제 번호 : ${m.questionIdx}</div>
 					<div>
 						문제 : 
-						<a href="${pageContext.request.contextPath}/teacher/exampleOne?questionNo=${m.questionNo}&questionTitle=${m.questionTitle}">
+						<a href="${pageContext.request.contextPath}/teacher/example/exampleOne?questionNo=${m.questionNo}">
 							${m.questionTitle}
 						</a>
 					</div>

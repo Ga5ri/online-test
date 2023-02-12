@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.ExampleMapper">
-<!-- 시험 문제 상세보기 -->
+	<!-- 보기 추가 -->
+	<insert id="addExample" parameterType="goodee.gdj58.online.vo.Example">
+		INSERT INTO example (
+						question_no
+						, example_idx
+						, example_title
+						, example_ox
+						) VALUES (
+							#{questionNo}
+							, #{exampleIdx}
+							, #{exampleTitle}
+							, #{exampleOx}
+						)	
+	</insert>
+	<!-- 보기 수정 -->
+	<update id="updateExample" parameterType="java.util.Map">
+		UPDATE example
+		SET example_idx = #{exampleIdx}
+			, example_title = #{exampleTitle}
+			, example_ox = #{exampleOx}
+		WHERE example_no = #{exampleNo}
+	</update>
+	
+	<!-- 시험 문제 상세보기 -->
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT
 			q.question_no questionNo
@@ -13,7 +36,7 @@
 		FROM question q 
 		INNER JOIN example e
 		ON q.question_no = e.question_no
-		WHERE q.question_no = #{questionNo} AND q.question_title = #{questionTitle}
+		WHERE q.question_no = #{questionNo}
 		ORDER BY q.question_no DESC
 	</select>
 </mapper>
