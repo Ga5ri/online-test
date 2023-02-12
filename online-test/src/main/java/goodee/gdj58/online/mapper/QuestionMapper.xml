@@ -17,17 +17,15 @@
 	<!-- 문제 수정 -->
 	<update id="updateQuestion" parameterType="java.util.Map">
 		UPDATE question
-		SET question_idx = #{questionIdx}
-			, question_title = #{questionTitle}
+		SET question_title = #{questionTitle}
 		WHERE question_no = #{questionNo}
 	</update>
-	<select id="questionList" resultType="java.util.Map" parameterType="java.util.Map">
-		SELECT
-			question_idx questionIdx
-			, question_title questionTitle
-		FROM question
+	
+	<!-- 문제 삭제 -->
+	<delete id="deleteQuestion" parameterType="int">
+		DELETE FROM question
 		WHERE question_no = #{questionNo}
-	</select>
+	</delete>
 	
 	<!-- 시험회차별 상세보기 -->
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">

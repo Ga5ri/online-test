@@ -8,8 +8,8 @@
 </head>
 <body>
 	<h1>시험 상세정보</h1>
-	<div style="text-align:center"><strong>${testNo} 회차 ${testTitle}${questionNo} 시험</strong></div>
-	<a href="${pageContext.request.contextPath}/teacher/addQuestion?testNo=${testNo}">문제 추가</a>
+	<div style="text-align:center"><strong>${testNo} 회차 ${testTitle} 시험</strong></div>
+	<a href="${pageContext.request.contextPath}/teacher/question/addQuestion?testNo=${testNo}">문제 추가</a>
 	<table border="1">
 		<tr>
 		<c:forEach var="m" items="${list}" varStatus="s">
@@ -27,7 +27,7 @@
 					</div>
 					<div>
 						<a href="${pageContext.request.contextPath}/teacher/question/modifyQuestion?questionNo=${m.questionNo}&testNo=${testNo}&questionTitle=${m.questionTitle}">수정</a>
-						<a href="${pageContext.request.contextPath}/teacher/modifyQuestion?questionNo=${m.questionNo}">삭제</a>
+						<a href="${pageContext.request.contextPath}/teacher/question/removeQuestion?questionNo=${m.questionNo}&testNo=${testNo}">삭제</a>
 					</div>
 				</td>	
 		</c:forEach>

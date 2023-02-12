@@ -41,24 +41,35 @@ public class QuestionController {
 	// 문제 수정
 	@GetMapping("/teacher/question/modifyQuestion")
 	public String modifyQuestion(Model model
+									, @RequestParam(value="questionTitle") String questionTitle
 									, @RequestParam(value="questionNo") int questionNo
-									, @RequestParam(value="questionIdx") int questionIdx
-									, @RequestParam(value="questionTitle") String questionTitle) {
-		List<Question> list = questionService.getQuestionList(questionNo, questionIdx, questionTitle);
-		model.addAttribute("list", list);
+									, @RequestParam(value="testNo") int testNo) {
+		model.addAttribute("questionTitle", questionTitle);
 		model.addAttribute("questionNo", questionNo);
-		log.debug("\u001B[31m"+questionNo+"<--questionNoByQuestion");
+		model.addAttribute("testNo", testNo);
+		log.debug("\u001B[31m"+questionTitle+"<--questionTitleByQuestion");
 		return "teacher/question/modifyQuestion";
 	}
 	@PostMapping("/teacher/question/modifyQuestion")
 	public String modifyQuestion(@RequestParam(value="questionNo") int questionNo
-									, @RequestParam(value="questionIdx") int questionIdx
+									, @RequestParam(value="testNo") int testNo
 									, @RequestParam(value="questionTitle") String questionTitle) {	
-		int row = questionService.modifyQuestion(questionNo, questionIdx, questionTitle);
+		int row =questionService.modifyQuestion(questionNo, questionTitle);
 		if(row == 1) {
-			log.debug("수정성공");
+			log.debug("수정 성공");
 		}
-		return "redirect:/teacher/question/testOne";	// sendRedirect, CM -> C
+		return "redirect:/teacher/question/questionOne?testNo="+testNo;	// sendRedirect, CM -> C
+	}
+	
+	// 문제 삭제
+	@GetMapping("/teacher/question/removeQuestion")
+	public String removeTest(@RequestParam(value="questionNo") int questionNo
+								, @RequestParam(value="testNo") int testNo) {
+		int row = questionService.deleteQuestion(questionNo);
+		if(row == 1) {
+			log.debug("삭제성공");
+		}
+		return "redirect:/teacher/question/questionOne?testNo="+testNo;
 	}
 	// 시험회차별 상세보기
 	@GetMapping("/teacher/question/questionOne")

@@ -23,22 +23,19 @@ public class QuestionService {
 	}
 	
 	// 문제 수정
-	public int modifyQuestion(int questionNo, int questionIdx, String questionTitle) {
+	public int modifyQuestion(int questionNo, String questionTitle) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("questionNo", questionNo);
-		paramMap.put("questionIdx", questionIdx);
 		paramMap.put("questionTitle", questionTitle);
 		
 		return questionMapper.updateQuestion(paramMap);
 	}
-	// 시험회차별 상세보기
-	public List<Question> getQuestionList(int questionNo, int questionIdx, String questionTitle) {
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("questionNo", questionNo);
-		paramMap.put("questionIdx", questionIdx);
-		paramMap.put("questionTitle", questionTitle);
-		return questionMapper.questionOne(paramMap);
+	
+	// 문제 삭제
+	public int deleteQuestion(int questionNo) {
+		return questionMapper.deleteQuestion(questionNo);
 	}
+	
 	// 시험회차별 상세보기
 	public List<Question> getQuestionOne(int testNo) {
 		Map<String, Object> paramMap = new HashMap<>();

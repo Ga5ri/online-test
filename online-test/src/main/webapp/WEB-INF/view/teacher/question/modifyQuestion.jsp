@@ -8,20 +8,15 @@
 </head>
 <body>
 	<h1>시험 문제수정</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/modifyQuestion">
-		<c:forEach var="m" items="${list}">
+	<form method="post" action="${pageContext.request.contextPath}/teacher/question/modifyQuestion">
+	<input type="hidden" name="questionNo" value="${questionNo}">
+	<input type="hidden" name="testNo" value="${testNo}">
 		<table border="1">
 			<tr>
-				<th>문제 번호</th>
-				<td><input type="number" name="questionIdx" value="${m.questionIdx}"></td>
-			</tr>
-			<tr>
 				<th>문제</th>
-				<td><textarea rows="3" cols="20" name="questionTitle">${m.questionTitle}</textarea></td>
-			</tr>
-			
+				<td><textarea rows="3" cols="20" name="questionTitle">${questionTitle}</textarea></td>
+			</tr>		
 		</table>
-		</c:forEach>
 		<div>
 			<button type="submit">수정하기</button>
 		</div>
