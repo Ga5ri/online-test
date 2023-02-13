@@ -15,7 +15,7 @@
 	<h1>문제별 상세보기</h1>
 	<a href="${pageContext.request.contextPath}/teacher/example/addExample?questionNo=${questionNo}">보기 추가</a>
 	<c:forEach var="m" items="${list}">
-		<c:if test="${m.exampleIdx == 1 }">
+		<c:if test="${m.exampleIdx == 1}">
 			<div><strong>${m.questionIdx}번 문제 ${m.questionTitle}</strong></div>
 		</c:if>
 	</c:forEach>
@@ -42,8 +42,8 @@
 						</c:choose>
 					</td>
 					<td>
-						<a href="${pageContext.request.contextPath}/teacher/example/modifyExample?exampleNo=${m.exampleNo}">수정</a>
-						<a href="${pageContext.request.contextPath}/teacher/example/removeExample?exampleNo=${m.exampleNo}">삭제</a>
+						<a href="${pageContext.request.contextPath}/teacher/example/modifyExample?exampleNo=${m.exampleNo}&questionNo=${questionNo}">수정</a>
+						<a href="${pageContext.request.contextPath}/teacher/example/removeExample?exampleNo=${m.exampleNo}&questionNo=${questionNo}">삭제</a>
 					</td>				
 				</tr>
 			</c:forEach>		

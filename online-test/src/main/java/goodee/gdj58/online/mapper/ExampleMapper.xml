@@ -4,25 +4,39 @@
 	<!-- 보기 추가 -->
 	<insert id="addExample" parameterType="goodee.gdj58.online.vo.Example">
 		INSERT INTO example (
-						question_no
-						, example_idx
-						, example_title
-						, example_ox
-						) VALUES (
-							#{questionNo}
-							, #{exampleIdx}
-							, #{exampleTitle}
-							, #{exampleOx}
-						)	
+			question_no
+			, example_idx
+			, example_title
+			, example_ox
+			) VALUES (
+				#{questionNo}
+				, #{exampleIdx}
+				, #{exampleTitle}
+				, #{exampleOx}
+			)	
 	</insert>
+	
 	<!-- 보기 수정 -->
-	<update id="updateExample" parameterType="java.util.Map">
+	<update id="updateExample" parameterType="goodee.gdj58.online.vo.Example">
 		UPDATE example
-		SET example_idx = #{exampleIdx}
-			, example_title = #{exampleTitle}
+		SET example_title = #{exampleTitle}
 			, example_ox = #{exampleOx}
 		WHERE example_no = #{exampleNo}
 	</update>
+	<select id="exList" resultType="goodee.gdj58.online.vo.Example" parameterType="int">
+		SELECT example_no exampleNo
+			, question_no questionNo
+			, example_idx exampleIdx
+			, example_title exampleTitle
+			, example_ox exampleOx
+		FROM example 
+		WHERE example_no = #{exampleNo}
+	</select>
+	<!-- 보기 삭제 -->
+	<delete id="deleteExample" parameterType="int">
+		DELETE FROM example
+		WHERE example_no = #{exampleNo}
+	</delete>
 	
 	<!-- 시험 문제 상세보기 -->
 	<select id="questionOne" resultType="java.util.Map" parameterType="java.util.Map">
@@ -30,6 +44,7 @@
 			q.question_no questionNo
 			, q.question_idx questionIdx
 			, q.question_title questionTitle
+			, e.example_no exampleNo
 			, e.example_idx exampleIdx
 			, e.example_title exampleTitle
 			, e.example_ox exampleOx
@@ -37,6 +52,6 @@
 		INNER JOIN example e
 		ON q.question_no = e.question_no
 		WHERE q.question_no = #{questionNo}
-		ORDER BY q.question_no DESC
+		ORDER BY e.example_idx ASC
 	</select>
 </mapper>

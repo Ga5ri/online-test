@@ -9,8 +9,8 @@
 <body>
 	<h1>시험 문제수정</h1>
 	<form method="post" action="${pageContext.request.contextPath}/teacher/question/modifyQuestion">
-	<input type="hidden" name="questionNo" value="${questionNo}">
-	<input type="hidden" name="testNo" value="${testNo}">
+		<input type="hidden" name="questionNo" value="${questionNo}">
+		<input type="hidden" name="testNo" value="${testNo}">
 		<table border="1">
 			<tr>
 				<th>문제</th>
