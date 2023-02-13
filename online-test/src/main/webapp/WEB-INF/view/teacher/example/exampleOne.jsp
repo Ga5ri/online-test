@@ -14,6 +14,7 @@
 <body>
 	<h1>문제별 상세보기</h1>
 	<a href="${pageContext.request.contextPath}/teacher/example/addExample?questionNo=${questionNo}">보기 추가</a>
+	<br>
 	<c:forEach var="m" items="${list}">
 		<c:if test="${m.exampleIdx == 1}">
 			<div><strong>${m.questionIdx}번 문제 ${m.questionTitle}</strong></div>

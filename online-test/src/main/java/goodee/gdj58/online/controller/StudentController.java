@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.StudentService;
 import goodee.gdj58.online.service.TestService;
+import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -27,17 +29,22 @@ public class StudentController {
 	@Autowired StudentService studentService;
 	@Autowired TestService testService;
 	@Autowired IdService idService;
+	
 	// 시험문제별 상세보기
 	@GetMapping("/student/takeQuestion")
 	public String questionOne(Model model
 								, @RequestParam(value="testNo") int testNo
 								, @RequestParam(value="testTitle") String testTitle) {
 
-		List<Student> list = studentService.getQuestionOne(testNo, testTitle);
-		model.addAttribute("list", list);
+		List<Question> qList = studentService.qList(testNo);
+		List<Example> exList = studentService.exList(testNo);
+		
+		model.addAttribute("qList", qList);
+		model.addAttribute("exList", exList);
 		model.addAttribute("testNo", testNo);
 		model.addAttribute("testTitle", testTitle);
-		log.debug("\u001B[31m"+list+"<--questionlist");
+		log.debug("\u001B[31m"+qList+"<--qList");
+		log.debug("\u001B[31m"+exList+"<--exList");
 		log.debug("\u001B[31m"+testTitle+"<--testTitle");
 		return "student/takeQuestion";
 	}

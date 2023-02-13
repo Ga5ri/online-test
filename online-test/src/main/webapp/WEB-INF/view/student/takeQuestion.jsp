@@ -8,24 +8,14 @@
 </head>
 <body>
 	<h1>${testNo}회차 시험명:${testTitle}</h1>
-		<c:forEach var="m" items="${list}">
-					<c:if test="${m.exampleIdx == 1}">
-						${m.questionIdx} 문제 : ${m.questionTitle}
-					</c:if>
-					<div>
-						<c:if test="${m.exampleIdx == 1}">
-							<input type="radio" name="answer${m.exampleIdx}" value="1">1. ${m.exampleTitle}
-						</c:if>
-						<c:if test="${m.exampleIdx == 2}">
-							<input type="radio" name="answer${m.exampleIdx}" value="2">2. ${m.exampleTitle}
-						</c:if>
-						<c:if test="${m.exampleIdx == 3}">
-							<input type="radio" name="answer${m.exampleIdx}" value="3">3. ${m.exampleTitle}
-						</c:if>
-						<c:if test="${m.exampleIdx == 4}">
-							<input type="radio" name="answer${m.exampleIdx}" value="4">4. ${m.exampleTitle}
-						</c:if>
-					</div>
+	<c:forEach var="q" items="${qList}">
+		<div>${q.questionIdx} 문제 : ${q.questionTitle}</div>
+		<c:forEach var="e" items="${exList}">
+			<c:if test="${e.exampleIdx =}">
+				${e.exampleTitle}
+			</c:if>	
 		</c:forEach>
+
+	</c:forEach>
 </body>
 </html>
