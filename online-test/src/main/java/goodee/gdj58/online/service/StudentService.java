@@ -28,7 +28,7 @@ public class StudentService {
 	public List<Example> exList(int testNo) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("testNo", testNo);
-		return studentMapper.exList(paramMap);
+		return studentMapper.exList(testNo);
 	}
 	
 	// 시험지출력(문제번호, 문제명)

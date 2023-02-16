@@ -8,14 +8,24 @@
 </head>
 <body>
 	<h1>${testNo}회차 시험명:${testTitle}</h1>
-	<c:forEach var="q" items="${qList}">
-		<div>${q.questionIdx} 문제 : ${q.questionTitle}</div>
-		<c:forEach var="e" items="${exList}">
-			<c:if test="${e.exampleIdx =}">
-				${e.exampleTitle}
-			</c:if>	
+	<form action="${pageContext.request.contextPath}/student/takeQuestion" method="post">
+		<input type="hidden" name="testNo" value="${testNo}">
+		<c:forEach var="q" items="${qList}">
+			<div>${q.questionIdx}번 문제 : ${q.questionTitle}</div>
+			<c:forEach var="e" items="${exList}" varStatus="i">
+				<input type="hidden" name="questionNo" value="${e.questionNo}">
+				<c:if test="${q.questionNo == e.questionNo}">
+					<div>
+						<input type="radio" name="answer[${i.index}]" value="e.exampleIdx">
+							${e.exampleIdx}. ${e.exampleTitle}
+					</div>
+				</c:if>	
+			</c:forEach>
 		</c:forEach>
-
-	</c:forEach>
+		<br>
+		<div>
+			<button type="submit">제출하기</button>
+		</div>
+	</form>
 </body>
 </html>
