@@ -19,13 +19,15 @@
 			<th>시험 제목</th>
 			<th>등록 날짜</th>
 			<th>시험 응시</th>
+			<th>점수 확인</th>
 		</tr>
 		<c:forEach var="t" items="${list}">	
 			<tr>
 				<td>${t.testNo}</td>
 				<td>${t.testTitle}</td>
 				<td>${t.testDate}</td>
-				<td><a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}&testTitle=${t.testTitle}">응시하기</a></td>
+				<td><a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}&testTitle=${t.testTitle}&studentNo=${loginStudent.studentNo}">응시하기</a></td>
+				<td><a href="${pageContext.request.contextPath}/student/paperOne?testNo=${t.testNo}&testTitle=${t.testTitle}&studentNo=${loginStudent.studentNo}">점수확인</a></td>
 			</tr>
 		</c:forEach>
 	</table>

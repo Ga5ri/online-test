@@ -24,10 +24,20 @@ import lombok.extern.slf4j.Slf4j;
 public class StudentService {
 	@Autowired StudentMapper studentMapper;
 	
+	// 점수 확인용 시험지출력(문제번호, 문제명)
+	public List<Map<String, Object>> scoreQuestionList(int testNo, int studentNo) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("testNo", testNo);
+		paramMap.put("studentNo", studentNo);
+		return studentMapper.scoreQuestionList(paramMap);
+	}
+	
+	
 	// 시험지출력(보기번호,보기)
 	public List<Example> exList(int testNo) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("testNo", testNo);
+		
 		return studentMapper.exList(testNo);
 	}
 	

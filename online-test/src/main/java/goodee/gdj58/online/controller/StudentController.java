@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
+import goodee.gdj58.online.service.PaperService;
 import goodee.gdj58.online.service.StudentService;
 import goodee.gdj58.online.service.TestService;
 import goodee.gdj58.online.vo.Example;
@@ -29,14 +30,16 @@ import lombok.extern.slf4j.Slf4j;
 public class StudentController {
 	@Autowired StudentService studentService;
 	@Autowired TestService testService;
+	@Autowired PaperService paperService;
 	@Autowired IdService idService;
 	
 	// 시험 응시(문제,보기 출력)
 	@GetMapping("/student/takeQuestion")
 	public String questionOne(Model model
 								, @RequestParam(value="testNo") int testNo
-								, @RequestParam(value="testTitle") String testTitle) {
-
+								, @RequestParam(value="testTitle") String testTitle
+								, @RequestParam("studentNo") int studentNo) {
+		
 		List<Question> qList = studentService.qList(testNo);
 		List<Example> exList = studentService.exList(testNo);
 		
@@ -44,19 +47,28 @@ public class StudentController {
 		model.addAttribute("exList", exList);
 		model.addAttribute("testNo", testNo);
 		model.addAttribute("testTitle", testTitle);
+		model.addAttribute("studentNo", studentNo);
 		log.debug("\u001B[31m"+qList+"<--qList");
 		log.debug("\u001B[31m"+exList+"<--exList");
 		log.debug("\u001B[31m"+testTitle+"<--testTitle");
+		log.debug("\u001B[31m"+studentNo+"<--testTitle");
 		return "student/takeQuestion";
 	}
 	
-	@PostMapping("/student/takeQuestion")
-	public String questionOne(Model model, HttpServletRequest request) {
-		String[] answer = request.getParameterValues("answer");
-		log.debug("\u001B[31m"+answer[0]+"<--exampleIdx");
+	@PostMapping("/student/addPaper")
+	public String addPaper(@RequestParam("studentNo") int studentNo
+							, @RequestParam(value="questionNo") int[] questionNo
+							, @RequestParam(value="answer") int[] answer) {
 
-		return "student/testListByStudent";
-	}
+	
+		log.debug(studentNo+" <-studentNo");
+		log.debug(questionNo[0]+" <-questionNo");
+		log.debug(answer[0]+" <-answer");	
+		
+		paperService.addPaper(studentNo, questionNo, answer);
+		
+		return "redirect:/student/testListByStudent";
+		}
 	
 	// 시험 리스트
 	@GetMapping("/student/testListByStudent")

@@ -14,6 +14,7 @@ import goodee.gdj58.online.vo.Student;
 
 @Mapper
 public interface StudentMapper {
+	List<Map<String, Object>> scoreQuestionList(Map<String, Object> paramMap);
 	List<Example> exList(int testNo);
 	List<Question> qList(Map<String, Object> paramMap);
 	int countSd(String searchWord);

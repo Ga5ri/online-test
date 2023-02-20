@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.PaperMapper">
+	
+	<select id="paperOne" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT    
+		    q.question_idx questionIdx
+		   , p.answer answer
+		FROM question q LEFT JOIN paper p
+		ON p.question_no = q.question_no
+		WHERE q.test_no = #{testNo} 
+		ORDER BY q.question_no, p.student_no ASC
+	</select>
+	
+	<!-- 시험 결과 저장 -->
+	<insert id="insertPaper" parameterType="java.util.Map">
+		INSERT INTO paper (
+			student_no
+			, question_no
+			, answer
+		) VALUES (
+			#{studentNo}
+			, #{questionNo}
+			, #{answer}
+		)
+	</insert>
+</mapper>
