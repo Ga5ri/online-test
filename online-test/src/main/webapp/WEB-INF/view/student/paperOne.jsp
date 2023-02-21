@@ -12,10 +12,10 @@
 		<div>${s.questionIdx}번 문제 : ${s.questionTitle}</div>
 		<div>내가 선택한 답 : <strong>${s.answer}</strong></div>
 		<c:forEach var="e" items="${exList}">
-			<c:if test="${q.questionNo == e.questionNo}">
+			<c:if test="${s.questionNo == e.questionNo}">
 				<div>
 					<input type="radio" name="answer${i.index}" id="answer${i.index}" value="${e.exampleIdx}" <c:if test="${e.exampleOx eq '정답'}">checked</c:if>>
-						${e.exampleIdx}. ${e.exampleTitle}
+						${e.exampleIdx}. ${e.exampleTitle} ${e.exampleOx}
 				</div>
 			</c:if>				
 		</c:forEach>

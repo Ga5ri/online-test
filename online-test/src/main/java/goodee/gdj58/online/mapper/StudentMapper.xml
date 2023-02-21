@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.StudentMapper">
 	<!-- 결과확인 시험지출력(문제번호,문제명) -->
-	<select id="scoreQuestionList" resultType="java.util.Map" parameterType="java.util.Map">
+	<select id="scoreQuestionList" resultType="java.util.Map" parameterType="int">
 		SELECT q.question_no questionNo
 			, q.test_no testNo
 			, q.question_idx questionIdx
