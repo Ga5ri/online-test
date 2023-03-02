@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.PaperMapper">
+	<!-- 점수 확인 -->
+	<select id="paperScore" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT p.paper_no paperNo
+			, p.student_no studentNo
+			, p.question_no questionNo
+			, p.answer 
+			, q.test_no testNo
+			, q.question_idx questionIdx
+			, q.question_title questionTitle
+			, e.example_ox exampleOx
+		FROM paper p 
+		INNER JOIN question q 
+		ON p.question_no = q.question_no
+		INNER JOIN example e
+		ON e.question_no = p.question_no
+		AND e.example_idx = p.answer
+		<where>
+			 AND q.test_no = #{testNo}
+			 AND p.student_no = #{studentNo}
+		</where>
+	</select>
 	
+	<!-- 답안지 출력 -->
 	<select id="paperOne" resultType="java.util.Map" parameterType="java.util.Map">
 		SELECT    
 		    q.question_idx questionIdx

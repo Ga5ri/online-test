@@ -32,24 +32,20 @@ public class PaperController {
 		List<Map<String, Object>> scoreQuestionList = studentService.scoreQuestionList(testNo, studentNo);
 		List<Example> exList = studentService.exList(testNo);
 		
-		int perfectScore = 100;
-		int cntQuestion = questionService.countQuestion(testNo);
-		int quePerScore = perfectScore/cntQuestion;
+		double score = paperService.getPaperScore(testNo, studentNo);
 		
 		
 		
 		model.addAttribute("scoreQuestionList", scoreQuestionList);
 		model.addAttribute("exList", exList);
-		model.addAttribute("cntQuestion", cntQuestion);
-		model.addAttribute("quePerScore", quePerScore);
 		model.addAttribute("testNo", testNo);
 		model.addAttribute("testTitle", testTitle);
 		model.addAttribute("studentNo", studentNo);
+		model.addAttribute("score", score);
 		
 		log.debug("\u001B[31m"+scoreQuestionList+"<--scoreQuestionList");
 		log.debug("\u001B[31m"+exList+"<--exList");
-		log.debug("\u001B[31m"+cntQuestion+"<--cntQuestion");
-		log.debug("\u001B[31m"+quePerScore+"<--quePerScore");
+		log.debug("\u001B[31m"+score+"<--score");
 		return "student/paperOne";
 	}
 }

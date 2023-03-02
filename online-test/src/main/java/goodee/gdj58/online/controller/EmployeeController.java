@@ -43,13 +43,7 @@ public class EmployeeController {
 		return "employee/student/addStudent";
 	}
 	@PostMapping("/employee/student/addStudent")
-	public String addStudent(Model model, Student student) {
-		String idCheck = idService.getIdCheck(student.getStudentId());
-		if(idCheck != null) {
-			model.addAttribute("errorMsg", "중복 ID");
-			return "employee/student/addStudent";
-		}
-		
+	public String addStudent(Model model, Student student) {	
 		int row = employeeService.addStudent(student);
 		if(row == 0) {
 			model.addAttribute("errorMsg", "시스템 에러로 등록 실패");
@@ -104,13 +98,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/employee/teacher/addTeacher")
-	public String addTeacher(Model model, Teacher teacher) {
-		String idCheck = idService.getIdCheck(teacher.getTeacherId());
-		if(idCheck != null) {
-			model.addAttribute("errorMsg", "중복 ID");
-			return "employee/teacher/addTeacher";
-		}
-		
+	public String addTeacher(Model model, Teacher teacher) {		
 		int row = employeeService.addTeacher(teacher);
 		if(row == 0) {
 			model.addAttribute("errorMsg", "시스템 에러로 등록 실패");
@@ -184,13 +172,7 @@ public class EmployeeController {
 		return "employee/addEmp";
 	}
 	@PostMapping("/employee/addEmp")
-	public String addEmp(Model model, Employee employee) {		
-		String idCheck = idService.getIdCheck(employee.getEmpId());
-		if(idCheck != null) {
-			model.addAttribute("errorMsg", "중복 ID");
-			return "employee/addEmp";
-		}
-		
+	public String addEmp(Model model, Employee employee) {
 		int row = employeeService.addEmployee(employee);
 		if(row == 0) {
 			model.addAttribute("errorMsg", "시스템 에러로 등록 실패");

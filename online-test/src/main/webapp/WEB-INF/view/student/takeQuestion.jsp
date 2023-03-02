@@ -13,7 +13,7 @@
 		console.log("qListSize:"+question);
 		console.log("answer값:"+answer);
 		$("#addPaperBtn").on("click", function(){
-			for(let i = 0; i<question; i++){
+			for(let i=0; i<question; i++){
 				let answerNo = $("input[name=answer"+(i)+"]:checked").val();
 				$(answer[i]).val(answerNo);
 				console.log("answerNo값:"+answerNo);

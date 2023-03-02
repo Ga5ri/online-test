@@ -9,15 +9,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import goodee.gdj58.online.controller.PaperController;
 import goodee.gdj58.online.mapper.PaperMapper;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Service
 @Transactional
 public class PaperService {
 	@Autowired PaperMapper paperMapper;
+	@Autowired QuestionService questionService;
+	// 시험 채점 결과 - 점수 출력
+	public double getPaperScore(int testNo, int studentNo) {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("testNo", testNo);
+		paramMap.put("studentNo", studentNo);
+		
+		int perfectScore = 100;
+		int cntQuestion = questionService.countQuestion(testNo);
+		double quePerScore = perfectScore/cntQuestion;		
+		
+		double score = 0;
+		List<Map<String, Object>> list = paperMapper.paperScore(paramMap);
+		for(Map<String, Object> m : list) {
+			String exampleOx = (String)m.get("exampleOx");
+			if(exampleOx.equals("정답")) {
+				score = score + quePerScore;
+			} 
+		}
+		log.debug("\u001B[31m"+score+"<--studentScore");
+		return score;
+	}
 	
-	// 시험 채점 결과
-	public List<Map<String, Object>> getPaperOne(int testNo){
+	// 시험 채점 결과 - 답안 출력
+	public List<Map<String, Object>> getPaperOne(int testNo) {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("testNo", testNo);
 		

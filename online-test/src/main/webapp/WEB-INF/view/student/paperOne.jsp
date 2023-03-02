@@ -7,7 +7,7 @@
 <title></title>
 </head>
 <body>
-	<h1>내 점수 : ${score}</h1>
+	<h1>내 점수 : ${score} 점</h1>
 	<c:forEach var="s" items="${scoreQuestionList}" varStatus="i">
 		<div>${s.questionIdx}번 문제 : ${s.questionTitle}</div>
 		<div>내가 선택한 답 : <strong>${s.answer}</strong></div>

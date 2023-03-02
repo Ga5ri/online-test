@@ -11,8 +11,12 @@ import goodee.gdj58.online.mapper.IdMapper;
 public class IdService {
 	@Autowired IdMapper idMapper;
 	
-	// null일 경우 사용가능한 ID
+	// no = 중복, yes = 사용가능 ID
 	public String getIdCheck(String id) {
-		return idMapper.selectIdCheck(id);
+		String result = "no";
+		if(idMapper.selectIdCheck(id) == null) {
+			result = "yes";
+		}
+		return result;
 	}
 }
