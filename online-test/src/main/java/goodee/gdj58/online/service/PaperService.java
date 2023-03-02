@@ -28,16 +28,16 @@ public class PaperService {
 		int cntQuestion = questionService.countQuestion(testNo);
 		double quePerScore = perfectScore/cntQuestion;		
 		
-		double score = 0;
+		double sdScore = 0;
 		List<Map<String, Object>> list = paperMapper.paperScore(paramMap);
 		for(Map<String, Object> m : list) {
 			String exampleOx = (String)m.get("exampleOx");
 			if(exampleOx.equals("정답")) {
-				score = score + quePerScore;
+				sdScore = sdScore + quePerScore;
 			} 
 		}
-		log.debug("\u001B[31m"+score+"<--studentScore");
-		return score;
+		log.debug("\u001B[31m"+sdScore+"<--studentScore");
+		return sdScore;
 	}
 	
 	// 시험 채점 결과 - 답안 출력

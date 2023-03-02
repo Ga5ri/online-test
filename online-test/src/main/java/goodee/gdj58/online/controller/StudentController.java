@@ -2,11 +2,8 @@ package goodee.gdj58.online.controller;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.PaperService;
+import goodee.gdj58.online.service.ScoreService;
 import goodee.gdj58.online.service.StudentService;
 import goodee.gdj58.online.service.TestService;
 import goodee.gdj58.online.vo.Example;
 import goodee.gdj58.online.vo.Question;
+import goodee.gdj58.online.vo.Score;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +30,7 @@ public class StudentController {
 	@Autowired StudentService studentService;
 	@Autowired TestService testService;
 	@Autowired PaperService paperService;
+	@Autowired ScoreService scoreService;
 	@Autowired IdService idService;
 	
 	// 시험 응시(문제,보기 출력)
@@ -56,7 +56,9 @@ public class StudentController {
 	}
 	
 	@PostMapping("/student/addPaper")
-	public String addPaper(@RequestParam("studentNo") int studentNo
+	public String addPaper(Model model
+							, @RequestParam(value="testNo") int testNo
+							, @RequestParam("studentNo") int studentNo
 							, @RequestParam(value="questionNo") int[] questionNo
 							, @RequestParam(value="answer") int[] answer) {
 
@@ -65,8 +67,21 @@ public class StudentController {
 		log.debug(questionNo[0]+" <-questionNo");
 		log.debug(answer[0]+" <-answer");	
 		
+		// 시험지 입력
 		paperService.addPaper(studentNo, questionNo, answer);
 		
+		// 시험 점수 계산
+		double sdScore = paperService.getPaperScore(testNo, studentNo);
+		
+		Score score = new Score();
+		score.setTestNo(testNo);
+		score.setStudentNo(studentNo);
+		score.setScore(sdScore);
+		
+		// 시험 점수 입력
+		scoreService.addScore(score);
+		
+		log.debug("\u001B[31m"+score+"<--testScore");
 		return "redirect:/student/testListByStudent";
 		}
 	

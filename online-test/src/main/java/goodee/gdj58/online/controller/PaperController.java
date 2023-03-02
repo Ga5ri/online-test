@@ -2,6 +2,7 @@ package goodee.gdj58.online.controller;
 
 import java.util.List;
 
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.PaperService;
-import goodee.gdj58.online.service.QuestionService;
+import goodee.gdj58.online.service.ScoreService;
 import goodee.gdj58.online.service.StudentService;
 import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Score;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PaperController {
 	@Autowired StudentService studentService;
 	@Autowired PaperService paperService;
-	@Autowired QuestionService questionService;
+	@Autowired ScoreService scoreService;
 	
 	@GetMapping("/student/paperOne")
 	public String questionOne(Model model
@@ -31,9 +33,7 @@ public class PaperController {
 		
 		List<Map<String, Object>> scoreQuestionList = studentService.scoreQuestionList(testNo, studentNo);
 		List<Example> exList = studentService.exList(testNo);
-		
-		double score = paperService.getPaperScore(testNo, studentNo);
-		
+		List<Score> scoreList = scoreService.getScore(testNo, studentNo);
 		
 		
 		model.addAttribute("scoreQuestionList", scoreQuestionList);
@@ -41,11 +41,11 @@ public class PaperController {
 		model.addAttribute("testNo", testNo);
 		model.addAttribute("testTitle", testTitle);
 		model.addAttribute("studentNo", studentNo);
-		model.addAttribute("score", score);
+		model.addAttribute("scoreList", scoreList);
 		
 		log.debug("\u001B[31m"+scoreQuestionList+"<--scoreQuestionList");
 		log.debug("\u001B[31m"+exList+"<--exList");
-		log.debug("\u001B[31m"+score+"<--score");
 		return "student/paperOne";
 	}
+	
 }

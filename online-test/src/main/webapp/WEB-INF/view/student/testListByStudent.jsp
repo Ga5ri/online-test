@@ -26,7 +26,17 @@
 				<td>${t.testNo}</td>
 				<td>${t.testTitle}</td>
 				<td>${t.testDate}</td>
-				<td><a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}&testTitle=${t.testTitle}&studentNo=${loginStudent.studentNo}">응시하기</a></td>
+				<td>
+					<!-- JOIN할지 따로 만들지 고민중 -->
+					<c:choose>
+						<c:when test="${score == 0}">
+							응시완료
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/student/takeQuestion?testNo=${t.testNo}&testTitle=${t.testTitle}&studentNo=${loginStudent.studentNo}">응시하기</a>
+						</c:otherwise>
+					</c:choose>
+				</td>
 				<td><a href="${pageContext.request.contextPath}/student/paperOne?testNo=${t.testNo}&testTitle=${t.testTitle}&studentNo=${loginStudent.studentNo}">점수확인</a></td>
 			</tr>
 		</c:forEach>

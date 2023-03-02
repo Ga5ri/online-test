@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodee.gdj58.online.mapper.ScoreMapper">
+	<!-- 점수 출력 -->
+	<select id="selectScore" resultType="goodee.gdj58.online.vo.Score" parameterType="java.util.Map">
+		SELECT 
+			test_no
+			, student_no
+			, score 
+		FROM score 
+		WHERE test_no = #{testNo} AND student_no = #{studentNo}
+	</select>
+	
+	<!-- 점수저장 -->
+	<insert id="insertScore" parameterType="goodee.gdj58.online.vo.Score">
+		INSERT INTO score(
+			test_no
+			, student_no
+			, score
+		) VALUES(
+			#{testNo}
+			, #{studentNo}
+			, #{score}
+			)
+	</insert>
+</mapper>
