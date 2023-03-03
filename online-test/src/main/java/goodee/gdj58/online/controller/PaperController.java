@@ -45,6 +45,7 @@ public class PaperController {
 		
 		log.debug("\u001B[31m"+scoreQuestionList+"<--scoreQuestionList");
 		log.debug("\u001B[31m"+exList+"<--exList");
+		log.debug("\u001B[31m"+scoreList+"<--scoreList");
 		return "student/paperOne";
 	}
 	

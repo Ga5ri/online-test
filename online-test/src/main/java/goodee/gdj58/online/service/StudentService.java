@@ -16,6 +16,7 @@ import goodee.gdj58.online.mapper.StudentMapper;
 import goodee.gdj58.online.vo.Example;
 import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
+import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -49,19 +50,28 @@ public class StudentService {
 		return studentMapper.qList(paramMap);
 	}
 	
+	// 학생 pw 수정
+	public int updateStudentPw(int studentNo, String oldPw, String newPw) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("studentNo", studentNo);
+		paramMap.put("oldPw", oldPw);
+		paramMap.put("newPw", newPw);
+		return studentMapper.updateStudentPw(paramMap);
+	}
+	
 	// 리스트
-	public List<Student> getStudList(int currentPage, int rowPerPage, String searchWord) {
+	public List<Test> getTestList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
 		paramMap.put("searchWord", searchWord);
-		return studentMapper.selectStudList(paramMap);
+		return studentMapper.selectTList(paramMap);
 	}
 	
 	// 카운트
-	public int countSd(String searchWord) {
-		return studentMapper.countSd(searchWord);
+	public int countTest(String searchWord) {
+		return studentMapper.countTList(searchWord);
 	}
 	// 로그인
 	public Student login(Student student) {

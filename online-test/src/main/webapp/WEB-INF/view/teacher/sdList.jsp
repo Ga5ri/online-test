@@ -13,7 +13,6 @@
 	</div>
 
 	<h1>Student List</h1>
-	<a href="${pageContext.request.contextPath}/student/addStudent">학생등록</a>
 	<table border="1">
 		<tr>
 			<th>studentId</th>

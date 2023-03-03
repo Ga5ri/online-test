@@ -16,15 +16,15 @@ import goodee.gdj58.online.vo.Score;
 public class ScoreService {
 	@Autowired ScoreMapper scoreMapper;
 	// 점수 출력
-		public List<Score> getScore(int testNo, int studentNo) {
-			Map<String, Object> paramMap = new HashMap<>();
-			paramMap.put("testNo", testNo);
-			paramMap.put("studentNo", studentNo);
-			return scoreMapper.selectScore(paramMap);
-		}
+	public List<Score> getScore(int testNo, int studentNo) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("testNo", testNo);
+		paramMap.put("studentNo", studentNo);
+		return scoreMapper.selectScore(paramMap);
+	}
 	
 	// 등록
-		public int addScore(Score score) {
-			return scoreMapper.insertScore(score);
-		}
+	public int addScore(Score score) {
+		return scoreMapper.insertScore(score);
+	}
 }

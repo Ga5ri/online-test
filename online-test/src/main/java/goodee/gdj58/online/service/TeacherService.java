@@ -29,7 +29,7 @@ public class TeacherService {
 		return teacherMapper.countSd(searchWord);
 	}
 	
-	// 강사 수정
+	// 강사 pw 수정
 	public int updateTeacherPw(int teacherNo, String oldPw, String newPw) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("teacherNo", teacherNo);

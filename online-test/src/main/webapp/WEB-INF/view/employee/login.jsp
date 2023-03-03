@@ -67,15 +67,11 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td>
-						<input type="text" name="empId">
-					</td>
+					<td><input type="text" name="empId"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td>
-						<input type="password" name="empPw">
-					</td>
+					<td><input type="password" name="empPw"></td>
 				</tr>
 			</table>
 			<button type="submit">로그인</button>
@@ -87,15 +83,11 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td>
-						<input type="text" name="teacherId">
-					</td>
+					<td><input type="text" name="teacherId"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td>
-						<input type="password" name="teacherPw">
-					</td>
+					<td><input type="password" name="teacherPw"></td>
 				</tr>
 			</table>
 			<button type="submit">로그인</button>
@@ -107,15 +99,11 @@
 			<table border="1">
 				<tr>
 					<td>아이디</td>
-					<td>
-						<input type="text" name="studentId">
-					</td>
+					<td><input type="text" name="studentId"></td>
 				</tr>
 				<tr>
 					<td>비밀번호</td>
-					<td>
-						<input type="password" name="studentPw">
-					</td>
+					<td><input type="password" name="studentPw"></td>
 				</tr>
 			</table>
 			<button type="submit">로그인</button>

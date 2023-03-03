@@ -73,13 +73,16 @@ public class TeacherController {
 		if(lastPage < endPage) {
 			endPage = lastPage;
 		}
+		
 		log.debug("\u001B[31m"+cnt+"<--cnt");
 		log.debug("\u001B[31m"+rowPerPage+"<--rowPerPage");
 		log.debug("\u001B[31m"+page+"<--page");
 		log.debug("\u001B[31m"+startPage+"<--startPage");
 		log.debug("\u001B[31m"+endPage+"<--endPage");
 		log.debug("\u001B[31m"+lastPage+"<--lastPage");
+		
 		List<Student> list = teacherService.getStudentList(currentPage, rowPerPage, searchWord);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPage", startPage);
@@ -88,6 +91,7 @@ public class TeacherController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("page", page);
 		model.addAttribute("searchWord", searchWord);
+		
 		return "teacher/sdList";
 	}
 }

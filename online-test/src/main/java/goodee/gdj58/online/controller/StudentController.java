@@ -21,6 +21,8 @@ import goodee.gdj58.online.service.TestService;
 import goodee.gdj58.online.vo.Example;
 import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Score;
+import goodee.gdj58.online.vo.Student;
+import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +40,7 @@ public class StudentController {
 	public String questionOne(Model model
 								, @RequestParam(value="testNo") int testNo
 								, @RequestParam(value="testTitle") String testTitle
-								, @RequestParam("studentNo") int studentNo) {
+								, @RequestParam(value="studentNo") int studentNo) {
 		
 		List<Question> qList = studentService.qList(testNo);
 		List<Example> exList = studentService.exList(testNo);
@@ -51,14 +53,14 @@ public class StudentController {
 		log.debug("\u001B[31m"+qList+"<--qList");
 		log.debug("\u001B[31m"+exList+"<--exList");
 		log.debug("\u001B[31m"+testTitle+"<--testTitle");
-		log.debug("\u001B[31m"+studentNo+"<--testTitle");
+		log.debug("\u001B[31m"+studentNo+"<--studentNo");
 		return "student/takeQuestion";
 	}
 	
 	@PostMapping("/student/addPaper")
 	public String addPaper(Model model
 							, @RequestParam(value="testNo") int testNo
-							, @RequestParam("studentNo") int studentNo
+							, @RequestParam(value="studentNo") int studentNo
 							, @RequestParam(value="questionNo") int[] questionNo
 							, @RequestParam(value="answer") int[] answer) {
 
@@ -85,13 +87,49 @@ public class StudentController {
 		return "redirect:/student/testListByStudent";
 		}
 	
+	// 학생 pw 수정
+	@GetMapping("/student/modifyStudentPw")
+	public String modifyStudentPw(HttpSession session) {
+		// 로그인 안된 상태라면 로그인 폼으로
+		Student loginStudent = (Student)session.getAttribute("loginStudent");
+		if(loginStudent == null) { 
+			return "redirect:/employee/login";
+		}
+		return "student/modifyStudentPw";
+	}
+	
+	@PostMapping("/student/modifyStudentPw")
+	public String modifyStudentPw(HttpSession session, @RequestParam("oldPw") String oldPw, @RequestParam("newPw") String newPw) {
+		Student loginStudent = (Student)session.getAttribute("loginStudent");
+		studentService.updateStudentPw(loginStudent.getStudentNo(), oldPw, newPw);
+		log.debug("\u001B[31m"+oldPw+"<--oldPw");
+		log.debug("\u001B[31m"+newPw+"<--newPw");
+		return "redirect:/student/testListByStudent";
+	}
+	
 	// 시험 리스트
 	@GetMapping("/student/testListByStudent")
-	public String testList(Model model) {
-
-		List<Test> list = testService.getTestList();
+	public String testList(Model model
+							, @RequestParam(value="currentPage", defaultValue="1") int currentPage
+							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage
+							, @RequestParam(value="searchWord", defaultValue="") String searchWord) {
+		int cnt = studentService.countTest(searchWord); // student count
+		int page = 10; // 페이지 목록
+		int startPage = ((currentPage - 1) / page) * page + 1; // 시작 페이지 ex) 1-10 = 1, 11-20 = 11
+		int endPage = startPage + page - 1; // 페이지의 마지막 ex) 1-10 = 10, 11-20 = 20
+		int lastPage = (int)Math.ceil((double)cnt / (double)rowPerPage); // 마지막 페이지
+		if(lastPage < endPage) {
+			endPage = lastPage;
+		}
+		List<Test> list = studentService.getTestList(currentPage, rowPerPage, searchWord);
 		model.addAttribute("list", list);
-
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("cnt", cnt);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("page", page);
+		model.addAttribute("searchWord", searchWord);
 		return "student/testListByStudent";
 	}
 	
