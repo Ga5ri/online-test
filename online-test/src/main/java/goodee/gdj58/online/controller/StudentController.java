@@ -3,6 +3,7 @@ package goodee.gdj58.online.controller;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +20,7 @@ import goodee.gdj58.online.service.ScoreService;
 import goodee.gdj58.online.service.StudentService;
 import goodee.gdj58.online.service.TestService;
 import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Paper;
 import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Score;
 import goodee.gdj58.online.vo.Student;
@@ -109,27 +111,17 @@ public class StudentController {
 	
 	// 시험 리스트
 	@GetMapping("/student/testListByStudent")
-	public String testList(Model model
-							, @RequestParam(value="currentPage", defaultValue="1") int currentPage
-							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage
-							, @RequestParam(value="searchWord", defaultValue="") String searchWord) {
-		int cnt = studentService.countTest(searchWord); // student count
-		int page = 10; // 페이지 목록
-		int startPage = ((currentPage - 1) / page) * page + 1; // 시작 페이지 ex) 1-10 = 1, 11-20 = 11
-		int endPage = startPage + page - 1; // 페이지의 마지막 ex) 1-10 = 10, 11-20 = 20
-		int lastPage = (int)Math.ceil((double)cnt / (double)rowPerPage); // 마지막 페이지
-		if(lastPage < endPage) {
-			endPage = lastPage;
+	public String testList(Model model, HttpSession session) {
+		Student loginStudent = (Student)session.getAttribute("loginStudent");
+		if(loginStudent == null) { 
+			return "redirect:/employee/login";
 		}
-		List<Test> list = studentService.getTestList(currentPage, rowPerPage, searchWord);
+		
+		
+		List<Map<String,Object>> list = studentService.getTestList(loginStudent.getStudentNo());
+		log.debug("\u001B[31m"+list+"<--list");
+		
 		model.addAttribute("list", list);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("cnt", cnt);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("page", page);
-		model.addAttribute("searchWord", searchWord);
 		return "student/testListByStudent";
 	}
 	

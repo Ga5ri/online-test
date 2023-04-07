@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodee.gdj58.online.mapper.StudentMapper">
+	
 	<!-- 결과확인 시험지출력(문제번호,문제명) -->
 	<select id="scoreQuestionList" resultType="java.util.Map" parameterType="int">
 		SELECT q.question_no questionNo
@@ -62,19 +63,20 @@
 	</select>
 	
 	<!-- 시험 목록 -->
-	<select id="selectTList" resultType="goodee.gdj58.online.vo.Test" parameterType="java.util.Map">
-		SELECT
-			test_no testNo
-			, test_title testTitle
-			, test_date testDate
-		FROM test
-		<where>
-			<if test="searchWord != null || searchWord != ''">
-				test_title like CONCAT('%', #{searchWord}, '%')
-			</if>
-		</where>
-		GROUP BY test_date DESC
-		LIMIT #{beginRow}, #{rowPerPage}
+	<select id="selectTList" resultType="java.util.Map" parameterType="java.util.Map">
+		SELECT a.testNo
+			, a.testTitle
+			, a.testDate
+			, MAX(if(a.studentNo = #{studentNo}, a.score, 0)) score
+		FROM (SELECT te.test_no testNo
+					, te.test_title testTitle
+					, te.test_date testDate
+					, if(sc.student_no IS NULL, 0, sc.student_no) studentNo
+					, if(sc.score IS NULL,0,sc.score) score
+				FROM test te 
+					LEFT OUTER JOIN score sc ON te.test_no = sc.test_no) a
+		GROUP BY testNo
+		ORDER BY testNo
 	</select>
 	
 	<!-- 학생 로그인 -->

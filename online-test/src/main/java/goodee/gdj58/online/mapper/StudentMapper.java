@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import goodee.gdj58.online.vo.Example;
+import goodee.gdj58.online.vo.Paper;
 import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
 import goodee.gdj58.online.vo.Test;
@@ -20,6 +21,6 @@ public interface StudentMapper {
 	List<Question> qList(Map<String, Object> paramMap);
 	int updateStudentPw(Map<String, Object> paramMap);
 	int countTList(String searchWord);
-	List<Test> selectTList(Map<String, Object> paramMap);
+	List<Map<String,Object>> selectTList(int studentNo);
 	Student loginSd(Student student);
 }

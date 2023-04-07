@@ -5,6 +5,7 @@ package goodee.gdj58.online.service;
 import java.util.HashMap;
 
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,6 @@ import goodee.gdj58.online.mapper.StudentMapper;
 import goodee.gdj58.online.vo.Example;
 import goodee.gdj58.online.vo.Question;
 import goodee.gdj58.online.vo.Student;
-import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class StudentService {
 	@Autowired StudentMapper studentMapper;
-	
+
 	// 점수 확인용 시험지출력(문제번호, 문제명)
 	public List<Map<String, Object>> scoreQuestionList(int testNo, int studentNo) {
 		Map<String, Object> paramMap = new HashMap<>();
@@ -59,14 +59,9 @@ public class StudentService {
 		return studentMapper.updateStudentPw(paramMap);
 	}
 	
-	// 리스트
-	public List<Test> getTestList(int currentPage, int rowPerPage, String searchWord) {
-		int beginRow = (currentPage - 1) * rowPerPage;
-		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("beginRow", beginRow);
-		paramMap.put("rowPerPage", rowPerPage);
-		paramMap.put("searchWord", searchWord);
-		return studentMapper.selectTList(paramMap);
+	//학생 시험 리스트
+	public List<Map<String,Object>> getTestList(int studentNo) {
+		return studentMapper.selectTList(studentNo);
 	}
 	
 	// 카운트
