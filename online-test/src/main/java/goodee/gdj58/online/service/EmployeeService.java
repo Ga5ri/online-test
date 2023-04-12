@@ -37,6 +37,12 @@ public class EmployeeService {
 	}
 	
 	// 리스트
+	public List<Student> getStudentList(){
+		return employeeMapper.selectStudentList();
+	}
+	
+	/*
+	* 리스트 주석처리
 	public List<Student> getStudentList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<>();
@@ -45,6 +51,8 @@ public class EmployeeService {
 		paramMap.put("searchWord", searchWord);
 		return employeeMapper.selectStudentList(paramMap);
 	}
+	
+	*/
 	
 	// 강사
 	// 카운트
@@ -63,6 +71,12 @@ public class EmployeeService {
 	}
 	
 	// 리스트
+	public List<Teacher> getTeacherList(){
+		return employeeMapper.selectTeacherList();
+	}
+		
+	/*
+	* 리스트 주석처리
 	public List<Teacher> getTeacherList(int currentPage, int rowPerPage, String searchWord) {
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -71,6 +85,7 @@ public class EmployeeService {
 		paramMap.put("searchWord", searchWord);
 		return employeeMapper.selectTeacherList(paramMap);
 	}
+	*/
 	
 	// 사원
 	// 카운트

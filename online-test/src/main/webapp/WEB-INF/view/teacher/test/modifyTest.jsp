@@ -3,26 +3,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title></title>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+	
+	    <title>Online-test|Modify Test</title>
+	
+	    <!-- Custom fonts for this template-->
+	    <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	    <link
+	        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	        rel="stylesheet">
+	
+	    <!-- Custom styles for this template-->
+	    <link href="${pageContext.request.contextPath}/resources/css/sb-admin-2.min.css" rel="stylesheet">
 </head>
-<body>
-	<h1>시험 수정</h1>
-	<form method="post" action="${pageContext.request.contextPath}/teacher/test/modifyTest">
-	<input type="hidden" name="testNo" value="${testNo}">
-		<table border="1">
-			<tr>
-				<th>시험명</th>
-				<td><input type="text" name="testTitle"></td>
-			</tr>
-			<tr>
-				<th>시험 일자</th>
-				<td><input type="date" name="testDate"></td>
-			</tr>
-		</table>
-		<div>
-			<button type="submit">수정하기</button>
-		</div>
-	</form>
-</body>
+	<body class="bg-gradient-primary">
+
+	    <div class="container">
+	
+	        <div class="card o-hidden border-0 shadow-lg my-5">
+	            <div class="card-body p-0">
+	                <!-- Nested Row within Card Body -->
+	                <div class="row">
+	                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+	                    <div class="col-lg-7">
+	                        <div class="p-5">
+	                            <div class="text-center">
+	                                <h1 class="h4 text-gray-900 mb-4">Modify Test!</h1>
+	                            </div>
+	                            <form method="post" action="${pageContext.request.contextPath}/teacher/test/modifyTest" id="addForm" class="user">
+	                            	<input type="hidden" name="testNo" value="${testNo}">
+	                                <div class="form-group">
+	                                    <input type="text" class="form-control form-control-user" name="testTitle" id="title"
+	                                    	placeholder="시험명을 입력해주세요.">
+	                                </div>
+	                                <div class="form-group">
+	                                        <input type="date" class="form-control form-control-user" name="testDate" id="date">
+	                                </div>
+	                                <button type="button" id="addBtn" class="btn btn-primary btn-user btn-block">
+	                                    시험 수정
+	                                </button>
+	                            </form>
+	                            <hr>
+	                            <div class="text-center">
+	                                <a class="small" href="${pageContext.request.contextPath}/teacher/test/testListByTeacher">홈으로</a>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	
+	    </div>
+	
+	    <!-- Bootstrap core JavaScript-->
+	    <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+	    <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	
+	    <!-- Core plugin JavaScript-->
+	    <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+	
+	    <!-- Custom scripts for all pages-->
+	    <script src="${pageContext.request.contextPath}/resources/js/sb-admin-2.min.js"></script>
+	    
+	    <script>
+		    $('#addBtn').click(function() {
+				// 폼 유효성 검사
+				if($('#title').val() == ''){
+					alert('시험명을 입력해주세요.');
+					return;
+				}
+				if($('#date').val() == ''){
+					alert('날짜를 선택해주세요.');
+					return;
+				}
+				
+				// 폼 액션 전송
+				alert('수정이 완료되었습니다.');
+				$('#addForm').submit();
+			});
+	    </script>
+	    
+	</body>
 </html>

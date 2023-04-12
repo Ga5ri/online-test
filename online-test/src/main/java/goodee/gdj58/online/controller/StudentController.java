@@ -116,12 +116,13 @@ public class StudentController {
 		if(loginStudent == null) { 
 			return "redirect:/employee/login";
 		}
-		
+		String studentName = loginStudent.getStudentName();
 		
 		List<Map<String,Object>> list = studentService.getTestList(loginStudent.getStudentNo());
 		log.debug("\u001B[31m"+list+"<--list");
 		
 		model.addAttribute("list", list);
+		model.addAttribute("studentName", studentName);
 		return "student/testListByStudent";
 	}
 	

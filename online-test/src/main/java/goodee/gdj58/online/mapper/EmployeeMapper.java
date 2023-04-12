@@ -15,13 +15,13 @@ public interface EmployeeMapper {
 	int countStudent(String searchWord);
 	int deleteStudent(int studentNo);
 	int insertStudent(Student student);
-	List<Student> selectStudentList(Map<String, Object> paramMap);
+	List<Student> selectStudentList();
 	
 	// 강사-----------------
 	int countTeacher(String searchWord);
 	int deleteTeacher(int teacherNo);
 	int insertTeacher(Teacher teacher);
-	List<Teacher> selectTeacherList(Map<String, Object> paramMap);
+	List<Teacher> selectTeacherList();
 	
 	// 사원-----------------
 	int countEmp(String searchWord);

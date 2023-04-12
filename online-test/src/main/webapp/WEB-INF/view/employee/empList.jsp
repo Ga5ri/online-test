@@ -26,65 +26,10 @@
 		
 	    <!-- Page Wrapper -->
 	    <div id="wrapper">
-		
-	        <!-- Sidebar -->
-	        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-	
-	            <!-- Sidebar - Brand -->
-	            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-	                <div class="sidebar-brand-icon rotate-n-15">
-	                    <i class="fas fa-laugh-wink"></i>
-	                </div>
-	                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
-	            </a>
-	
-	            <!-- Divider -->
-	            <hr class="sidebar-divider my-0">
-	
-	            <!-- Nav Item - Dashboard -->
-	            <li class="nav-item">
-	                <a class="nav-link" href="${pageContext.request.contextPath}/employee/empList">
-	                    <i class="fas fa-fw fa-tachometer-alt"></i>
-	                    <span>Home</span></a>
-	            </li>
-	
-	            <!-- Divider -->
-	            <hr class="sidebar-divider">
-	
-	            <!-- Heading -->
-	            <div class="sidebar-heading">
-	                Interface
-	            </div>
-	
-	            <!-- Nav Item - Pages Collapse Menu -->
-	            <li class="nav-item">
-	                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-	                    aria-expanded="true" aria-controls="collapseTwo">
-	                    <i class="fas fa-fw fa-cog"></i>
-	                    <span>관리</span>
-	                </a>
-	                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-	                    <div class="bg-white py-2 collapse-inner rounded">
-	                        <h6 class="collapse-header">관리</h6>
-	                        <a class="collapse-item" href="${pageContext.request.contextPath}/employee/empList">사원관리</a>
-	                        <a class="collapse-item" href="${pageContext.request.contextPath}/employee/teacher/teacherList">강사관리</a>
-	                        <a class="collapse-item" href="${pageContext.request.contextPath}/employee/student/studentList">학생관리</a>
-	                    </div>
-	                </div>
-	            </li>
-
-	         
-	            <!-- Divider -->
-	            <hr class="sidebar-divider d-none d-md-block">
-	
-	            <!-- Sidebar Toggler (Sidebar) -->
-	            <div class="text-center d-none d-md-inline">
-	                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-	            </div>
-	
-	        </ul>
-	        <!-- End of Sidebar -->
-	
+	    
+	    	<!-- jstl 페이지 include -->
+			<c:import url="/WEB-INF/view/employee/inc/empMenu.jsp"></c:import>
+			
 	        <!-- Content Wrapper -->
 	        <div id="content-wrapper" class="d-flex flex-column">
 	
@@ -138,12 +83,12 @@
 	                            <!-- Dropdown - User Information -->
 	                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 	                                aria-labelledby="userDropdown">
-	                                <a class="dropdown-item" href="#">
+	                                <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/modifyEmpPw">
 	                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 	                                    비밀번호 수정
 	                                </a>
 	                                <div class="dropdown-divider"></div>
-	                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+	                                <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/logout" data-toggle="modal" data-target="#logoutModal">
 	                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 	                                    로그아웃
 	                                </a>
@@ -232,15 +177,15 @@
 	        <div class="modal-dialog" role="document">
 	            <div class="modal-content">
 	                <div class="modal-header">
-	                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+	                    <h5 class="modal-title" id="exampleModalLabel">정말로 로그아웃 하시겠습니까?</h5>
 	                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
 	                        <span aria-hidden="true">×</span>
 	                    </button>
 	                </div>
-	                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+	                <div class="modal-body">로그아웃시 현재 작성중인 사항들은 저장되지 않습니다.</div>
 	                <div class="modal-footer">
 	                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-	                    <a class="btn btn-primary" href="login.html">Logout</a>
+	                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/employee/logout">Logout</a>
 	                </div>
 	            </div>
 	        </div>
@@ -264,37 +209,37 @@
 	    <script src="${pageContext.request.contextPath}/resources/js/demo/datatables-demo.js"></script>
 
 		<!--
-		검색 주석처리
-		<form method="get" action="${pageContext.request.contextPath}/employee/empList">
-			<input type="text" name="searchWord" value="${searchWord}">
-			<button type="submit">이름검색</button>
-		</form>
+			검색 주석처리
+			<form method="get" action="${pageContext.request.contextPath}/employee/empList">
+				<input type="text" name="searchWord" value="${searchWord}">
+				<button type="submit">이름검색</button>
+			</form>
 		-->
 		
 		<!-- 
-		페이징 주석처리
-		<div>
-			<a class="btn" href="${pageContext.request.contextPath}/employee/empList?currentPage=1&searchWord=${searchWord}">처음</a>
-			<c:if test="${currentPage > 1}">
-				<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${currentPage-1}&searchWord=${searchWord}">&lt;</a>
-			</c:if>
-			<c:forEach var="index" begin="${startPage}" end="${endPage}" step="1">
-				<c:if test="${index <= lastPage}">
-					<c:choose>
-						<c:when test="${index != currentPage}">
-							<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${index}&searchWord=${searchWord}">${index}</a>
-						</c:when>
-						<c:otherwise>
-							<strong>${index}</strong>
-						</c:otherwise>
-					</c:choose>
+			페이징 주석처리
+			<div>
+				<a class="btn" href="${pageContext.request.contextPath}/employee/empList?currentPage=1&searchWord=${searchWord}">처음</a>
+				<c:if test="${currentPage > 1}">
+					<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${currentPage-1}&searchWord=${searchWord}">&lt;</a>
 				</c:if>
-			</c:forEach>
-			<c:if test="${currentPage < lastPage}">
-				<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${currentPage+1}&searchWord=${searchWord}">&gt;</a>
-			</c:if>
-			<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${lastPage}&searchWord=${searchWord}">마지막</a>
-		</div>
+				<c:forEach var="index" begin="${startPage}" end="${endPage}" step="1">
+					<c:if test="${index <= lastPage}">
+						<c:choose>
+							<c:when test="${index != currentPage}">
+								<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${index}&searchWord=${searchWord}">${index}</a>
+							</c:when>
+							<c:otherwise>
+								<strong>${index}</strong>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+				</c:forEach>
+				<c:if test="${currentPage < lastPage}">
+					<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${currentPage+1}&searchWord=${searchWord}">&gt;</a>
+				</c:if>
+				<a href="${pageContext.request.contextPath}/employee/empList?currentPage=${lastPage}&searchWord=${searchWord}">마지막</a>
+			</div>
 		-->
 	</body>
 </html>

@@ -52,12 +52,26 @@ public class EmployeeController {
 		return "redirect:/employee/student/studentList";
 	}
 	
-	// 학생 리스트(검색 추가)
+	// 학생 리스트
 	@GetMapping("/employee/student/studentList")
-	public String studentList(Model model
-							, @RequestParam(value="currentPage", defaultValue="1") int currentPage
-							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage
-							, @RequestParam(value="searchWord", defaultValue="") String searchWord) {
+	public String studentList(Model model, HttpSession session) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) {
+			return "redirect:/employee/login";
+		}
+		String empName = loginEmp.getEmpName();
+		List<Student> list = employeeService.getStudentList();
+		// request.setAttribute("list", list);
+		model.addAttribute("list", list);
+		model.addAttribute("empName", empName);
+		
+		return "employee/student/studentList";
+	}
+	
+	/*
+	* 학생 리스트(검색 추가) 주석처리
+	@GetMapping("/employee/student/studentList")
+	public String studentList(Model model, HttpSession session) {
 		int cnt = employeeService.countStudent(searchWord); // student count
 		int page = 10; // 페이지 목록
 		int startPage = ((currentPage - 1) / page) * page + 1; // 시작 페이지 ex) 1-10 = 1, 11-20 = 11
@@ -83,6 +97,7 @@ public class EmployeeController {
 		model.addAttribute("searchWord", searchWord);
 		return "employee/student/studentList";
 	}
+	*/
 	
 	// 강사 삭제
 	@GetMapping("/employee/teacher/removeTeacher")
@@ -109,6 +124,23 @@ public class EmployeeController {
 	
 	// 강사 리스트
 	@GetMapping("/employee/teacher/teacherList")
+	public String teacherList(Model model, HttpSession session) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) {
+			return "redirect:/employee/login";
+		}
+		String empName = loginEmp.getEmpName();
+		List<Teacher> list = employeeService.getTeacherList();
+		// request.setAttribute("list", list);
+		model.addAttribute("list", list);
+		model.addAttribute("empName", empName);
+		
+		return "employee/teacher/teacherList";
+	}
+	
+	/*
+	* 강사 리스트 주석처리
+	@GetMapping("/employee/teacher/teacherList")
 	public String teacherList(Model model
 							, @RequestParam(value="currentPage", defaultValue="1") int currentPage
 							, @RequestParam(value="rowPerPage", defaultValue="10") int rowPerPage
@@ -132,7 +164,8 @@ public class EmployeeController {
 		model.addAttribute("searchWord", searchWord);
 		return "employee/teacher/teacherList";
 	}
-
+	*/
+	
 	// 사원 로그아웃
 	@GetMapping("/employee/logout")
 	public String logout(HttpSession session) {
@@ -180,10 +213,14 @@ public class EmployeeController {
 		}
 		return "redirect:/employee/empList";	// sendRedirect, CM -> C
 	}
-	// 사원 리스트(검색 추가)
+	
+	// 사원 리스트
 	@GetMapping("/employee/empList")
 	public String empList(Model model, HttpSession session) {
 		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		if(loginEmp == null) {
+			return "redirect:/employee/login";
+		}
 		String empName = loginEmp.getEmpName();
 		List<Employee> list = employeeService.getEmployeeList();
 		// request.setAttribute("list", list);

@@ -9,7 +9,7 @@
 	    <meta name="description" content="">
 	    <meta name="author" content="">
 	
-	    <title>Online-test|Tea</title>
+	    <title>Online-test|Emp</title>
 	
 	    <!-- Custom fonts for this template -->
 	    <link href="${pageContext.request.contextPath}/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,7 @@
 	<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 	
 	    <!-- Sidebar - Brand -->
-	    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/employee/teacher/test/testListByTeacher">
+	    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/employee/empList">
 	        <div class="sidebar-brand-icon rotate-n-15">
 	            <i class="fas fa-laugh-wink"></i>
 	        </div>
@@ -40,7 +40,7 @@
 	
 	    <!-- Nav Item - Dashboard -->
 	    <li class="nav-item">
-	        <a class="nav-link" href="${pageContext.request.contextPath}/employee/teacher/test/testListByTeacher">
+	        <a class="nav-link" href="${pageContext.request.contextPath}/employee/empList">
 	            <i class="fas fa-fw fa-tachometer-alt"></i>
 	            <span>Home</span></a>
 	    </li>
@@ -63,7 +63,9 @@
 	        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 	            <div class="bg-white py-2 collapse-inner rounded">
 	                <h6 class="collapse-header">관리</h6>
-	                <a class="collapse-item" href="${pageContext.request.contextPath}/teacher/test/testListByTeacher">시험 관리</a>
+	                <a class="collapse-item" href="${pageContext.request.contextPath}/employee/empList">사원 관리</a>
+	                <a class="collapse-item" href="${pageContext.request.contextPath}/employee/teacher/teacherList">강사 관리</a>
+	                <a class="collapse-item" href="${pageContext.request.contextPath}/employee/student/studentList">학생 관리</a>
 	            </div>
 	        </div>
 	    </li>

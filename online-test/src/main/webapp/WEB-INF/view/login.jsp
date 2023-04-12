@@ -158,24 +158,7 @@
 	</head>
 	
 	<body>
-		<!-- 로그인 후 -->
-		<c:if test="${loginEmp != null}">
-			<span>
-				${loginEmp.empName}님 반갑습니다<a href="${pageContext.request.contextPath}/employee/logout">로그아웃</a>
-			</span>
-		</c:if>
-		<!-- 로그인 후 -->
-		<c:if test="${loginTeacher != null}">
-			<span>
-				${loginTeacher.teacherName}님 반갑습니다<a href="${pageContext.request.contextPath}/teacher/logout">로그아웃</a>
-			</span>
-		</c:if>
-		<!-- 로그인 후 -->
-		<c:if test="${loginStudent != null}">
-			<span>
-				${loginStudent.studentName}님 반갑습니다<a href="${pageContext.request.contextPath}/student/logout">로그아웃</a>
-			</span>
-		</c:if>
+	
 		<c:if test="${loginEmp == null || loginTeacher == null || loginStudent == null}">
 			<div class="login-wrap">
 				<div class="login-html">

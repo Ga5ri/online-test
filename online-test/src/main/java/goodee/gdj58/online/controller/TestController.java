@@ -2,7 +2,7 @@ package goodee.gdj58.online.controller;
 
 import java.util.List;
 
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import goodee.gdj58.online.service.IdService;
 import goodee.gdj58.online.service.TestService;
+import goodee.gdj58.online.vo.Employee;
+import goodee.gdj58.online.vo.Teacher;
 import goodee.gdj58.online.vo.Test;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TestController {
 	@Autowired TestService testService;
 	@Autowired IdService idService;
+	
 	// 시험 등록
 	@GetMapping("/teacher/test/addTest")
 	public String addTest() {
@@ -38,8 +41,12 @@ public class TestController {
 	
 	// 시험 수정
 	@GetMapping("/teacher/test/modifyTest")
-	public String modifyTest(Model model, @RequestParam(value="testNo") int testNo) {
+	public String modifyTest(Model model, Test test
+								, @RequestParam(value="testNo") int testNo) {
+		String testTitle = test.getTestTitle();
+		log.debug("testTitle->"+testTitle);
 		model.addAttribute("testNo", testNo);
+		model.addAttribute("testTitle", testTitle);
 		return "teacher/test/modifyTest";
 	}
 	@PostMapping("/teacher/test/modifyTest")
@@ -63,11 +70,18 @@ public class TestController {
 	
 	// 시험 리스트
 	@GetMapping("/teacher/test/testListByTeacher")
-	public String testList(Model model) {
-
+	public String testList(Model model, HttpSession session) {
+		Teacher loginTeacher = (Teacher)session.getAttribute("loginTeacher");
+		if(loginTeacher == null) {
+			return "redirect:/employee/login";
+		}
+		
+		String teacherName = loginTeacher.getTeacherName();
+		
 		List<Test> list = testService.getTestList();
+		
 		model.addAttribute("list", list);
-
+		model.addAttribute("teacherName", teacherName);
 		return "teacher/test/testListByTeacher";
 	}
 }

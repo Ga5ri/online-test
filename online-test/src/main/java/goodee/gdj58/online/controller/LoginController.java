@@ -42,7 +42,7 @@ public class LoginController {
 		} else if(resultTeacher != null) {
 			session.setAttribute("loginTeacher", resultTeacher);
 			log.debug("\u001B[31m"+resultTeacher+"<--loginTeacher");
-			return "redirect:/teacher/sdList";
+			return "redirect:/teacher/test/testListByTeacher";
 		} else if(resultStudent != null) {
 			session.setAttribute("loginStudent", resultStudent);
 			log.debug("\u001B[31m"+resultStudent+"<--loginStudent");
