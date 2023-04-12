@@ -180,7 +180,20 @@ public class EmployeeController {
 		}
 		return "redirect:/employee/empList";	// sendRedirect, CM -> C
 	}
-	
+	// 사원 리스트(검색 추가)
+	@GetMapping("/employee/empList")
+	public String empList(Model model, HttpSession session) {
+		Employee loginEmp = (Employee)session.getAttribute("loginEmp");
+		String empName = loginEmp.getEmpName();
+		List<Employee> list = employeeService.getEmployeeList();
+		// request.setAttribute("list", list);
+		model.addAttribute("list", list);
+		model.addAttribute("empName", empName);
+		
+		return "employee/empList";
+	}
+	/*
+	부트스트랩 자체 js로 인해 주석 처리
 	// 사원 리스트(검색 추가)
 	@GetMapping("/employee/empList")
 	public String empList(Model model
@@ -215,4 +228,5 @@ public class EmployeeController {
 		
 		return "employee/empList";
 	}
+	*/
 }

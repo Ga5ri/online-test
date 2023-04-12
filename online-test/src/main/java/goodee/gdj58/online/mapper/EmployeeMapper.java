@@ -29,5 +29,5 @@ public interface EmployeeMapper {
 	Employee login(Employee employee);
 	int deleteEmployee(int empNo);
 	int insertEmployee(Employee employee);
-	List<Employee> selectEmployeeList(Map<String, Object> paramMap);
+	List<Employee> selectEmployeeList();
 }

@@ -136,6 +136,17 @@
 			, emp_id empId
 			, emp_name empName
 		FROM employee
+		GROUP BY emp_no DESC
+	</select>
+	
+	<!-- 
+	부트스트랩 자체 적용으로 주석처리
+	<select id="selectEmployeeList" resultType="goodee.gdj58.online.vo.Employee" parameterType="java.util.Map">
+		SELECT
+			emp_no	empNo
+			, emp_id empId
+			, emp_name empName
+		FROM employee
 		<where>
 			<if test="searchWord != null || searchWord != ''">
 				emp_name like CONCAT('%', #{searchWord}, '%')
@@ -143,6 +154,7 @@
 		</where>
 		GROUP BY emp_no DESC
 		LIMIT #{beginRow}, #{rowPerPage}
-	</select>
+	</select> 
+	-->
 	<!-- 사원 Mapper End -->
 </mapper>

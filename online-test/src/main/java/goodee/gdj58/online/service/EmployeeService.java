@@ -103,6 +103,13 @@ public class EmployeeService {
 	}
 	
 	// 리스트
+	public List<Employee> getEmployeeList(){
+		return employeeMapper.selectEmployeeList();
+	}
+	
+	/*
+	부트스트랩 자체 적용으로 주석 처리
+	// 리스트
 	public List<Employee> getEmployeeList(int currentPage, int rowPerPage, String searchWord){
 		int beginRow = (currentPage - 1) * rowPerPage;
 		Map<String, Object> paramMap = new HashMap<String, Object>();
@@ -111,4 +118,5 @@ public class EmployeeService {
 		paramMap.put("searchWord", searchWord);
 		return employeeMapper.selectEmployeeList(paramMap);
 	}
+	*/
 }
